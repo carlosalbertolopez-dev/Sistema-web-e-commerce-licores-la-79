@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Términos y Condiciones - Licores la 79</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Library/bootstrap-4.6.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="Library/jquery-3.6.0.js"></script>
+    <script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
+    <link rel="icon" type="image/ico" href="images/botella.ico.ico" />
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <style>
+        body { background-color: #000; color: #fff; }
+        .legal-section { max-width: 900px; margin: 0 auto; }
+        .legal-section h2 { color: #FFD700; font-weight: bold; }
+        .legal-section h5 { color: #FFD700; font-weight: bold; margin-top: 30px; }
+        .legal-section p { color: #ccc; line-height: 1.8; }
+        .breadcrumb a { color: #FFD700; text-decoration: none; }
+        .breadcrumb .breadcrumb-item.active { color: #999; }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR PRINCIPAL -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
+    <a class="navbar-brand" href="index.html" style="padding-left: 3rem;">
+        <img src="images/licores79.png" alt="Licores 79" style="max-height: 120px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+        <form class="form-inline ml-auto mr-5">
+            <input class="form-control form-control-sm mr-2" type="text" placeholder="Buscar Productos...">
+            <button class="btn btn-sm" style="background-color: #FFD700;" type="submit">
+    <i class="fas fa-search" style="color: #000;"></i>
+</button>   
+        </form>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="FormTest.html" title="Ingresar">
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Carrito.html" title="Carrito">
+                    <i class="fas fa-cart-shopping"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- NAVBAR DE CATEGORÍAS -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categorias">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="categorias">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Vinos</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Vino Tinto</a>
+                    <a class="dropdown-item" href="#">Vino Blanco</a>
+                    <a class="dropdown-item" href="#">Vino Rosado</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Whisky</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Whisky Escocés</a>
+                    <a class="dropdown-item" href="#">Whisky Canadiense</a>
+                    <a class="dropdown-item" href="#">Whisky Americano</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Tequilas</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Blanco</a>
+                    <a class="dropdown-item" href="#">Reposado</a>
+                    <a class="dropdown-item" href="#">Añejo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Licores</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Ron</a>
+                    <a class="dropdown-item" href="#">Vodka</a>
+                    <a class="dropdown-item" href="#">Gin</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Cervezas</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Nacionales</a>
+                    <a class="dropdown-item" href="#">Importadas</a>
+                    <a class="dropdown-item" href="#">Artesanales</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Coctelería</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Kit Coctelería</a>
+                    <a class="dropdown-item" href="#">Mezcladores</a>
+                    <a class="dropdown-item" href="#">Vasos</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Bebidas y Alimentos</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Snacks</a>
+                    <a class="dropdown-item" href="#">Bebidas No Alcohólicas</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Otros</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Accesorios</a>
+                    <a class="dropdown-item" href="#">Regalos</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger font-weight-bold" href="#">+ Ofertas +</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- CONTENIDO LEGAL -->
+<section class="legal-section py-5">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+            <li class="breadcrumb-item active">Términos y Condiciones</li>
+        </ol>
+    </nav>
+
+    <h2 class="mb-2">Términos y Condiciones</h2>
+    <p class="text-muted mb-5">Última actualización: 8 de octubre de 2026</p>
+
+    <h5>1. Aceptación de los términos</h5>
+    <p>Al acceder y utilizar el sitio web de Licores la 79, usted acepta cumplir con los presentes términos y condiciones. Si no está de acuerdo con alguno de ellos, le pedimos abstenerse de utilizar nuestros servicios.</p>
+
+    <h5>2. Mayoría de edad</h5>
+    <p>La compra y consumo de bebidas alcohólicas está permitida únicamente a personas mayores de 18 años. Al realizar un pedido, usted declara bajo gravedad de juramento ser mayor de edad y se compromete a presentar documento de identidad al momento de la entrega. Prohíbase el expendio de bebidas embriagantes a menores de edad.</p>
+
+    <h5>3. Productos y precios</h5>
+    <p>Los precios publicados están expresados en pesos colombianos (COP) e incluyen los impuestos vigentes. Licores la 79 se reserva el derecho de modificar precios, disponibilidad y promociones sin previo aviso. Las imágenes son de carácter ilustrativo.</p>
+
+    <h5>4. Pedidos y pagos</h5>
+    <p>Los pedidos se confirman una vez verificado el pago o, en el caso de pago contra entrega, al momento de la entrega. Nos reservamos el derecho de rechazar pedidos por motivos de stock, zona de cobertura o sospecha de fraude.</p>
+
+    <h5>5. Domicilios y entregas</h5>
+    <p>Realizamos entregas en Cali en el horario establecido. Los tiempos de entrega son estimados y pueden variar según tráfico, clima o disponibilidad. La entrega se realiza únicamente a personas mayores de edad que presenten documento de identidad.</p>
+
+    <h5>6. Devoluciones</h5>
+    <p>Por tratarse de productos perecederos sellados, solo aceptamos devoluciones por defectos de fábrica o errores en el envío, dentro de las 24 horas siguientes a la entrega y con el producto sin abrir.</p>
+
+    <h5>7. Consumo responsable</h5>
+    <p>El exceso de alcohol es perjudicial para la salud. Promovemos el consumo responsable y desestimamos cualquier uso indebido de nuestros productos. No vendemos a mujeres embarazadas ni a personas en estado de embriaguez.</p>
+
+    <h5>8. Propiedad intelectual</h5>
+    <p>Todos los contenidos de este sitio (logos, marcas, textos, imágenes) son propiedad de Licores la 79 o de sus respectivos titulares y están protegidos por las leyes de propiedad intelectual.</p>
+
+    <h5>9. Modificaciones</h5>
+    <p>Licores la 79 podrá modificar estos términos en cualquier momento. Los cambios entrarán en vigencia desde su publicación en el sitio.</p>
+
+    <h5>10. Contacto</h5>
+    <p>Para cualquier consulta puede comunicarse con nosotros en nuestra sede: Calle 79 # 3bn97 (Floralia), Cali, Colombia.</p>
+
+</section>
+
+<!-- LÍNEA SEPARADORA -->
+<hr style="border: none; border-top: 1px solid #333; margin: 40px 0 0 0;">
+
+<!-- FOOTER -->
+<footer style="background-color: #111; color: #ccc; padding: 50px 0 0 0;">
+    <div class="container">
+        <div class="row">
+
+            <!-- Columna 1: Logo + Descripción + Redes -->
+            <div class="col-md-3 mb-4">
+                <img src="images/licores79.png" alt="Licores 79" style="max-height: 70px; margin-bottom: 15px;">
+                <p style="color: #999; font-size: 0.9rem;">La mejor selección de licores con entrega rápida en Cali.</p>
+                <div class="d-flex">
+                    <a href="https://instagram.com/guille_licoresla79" target="_blank" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" target="_blank" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" target="_blank" style="color: #FFD700; font-size: 1.3rem;">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Columna 2: Tienda -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">NUESTRA TIENDA</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem;">
+                    <li class="mb-2"><a href="index.html" style="color: #999; text-decoration: none;">Inicio</a></li>
+                    <li class="mb-2"><a href="#" style="color: #999; text-decoration: none;">Categorías</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Legal -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">LEGAL</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem;">
+                    <li class="mb-2"><a href="PreguntasFrecuentes.html?v=1" style="color: #999; text-decoration: none;">Preguntas frecuentes</a></li>
+                    <li class="mb-2"><a href="TerminosCondiciones.html?v=1" style="color: #999; text-decoration: none;">Términos y condiciones</a></li>
+                    <li class="mb-2"><a href="PoliticaPrivacidad.html?v=1" style="color: #999; text-decoration: none;">Política de privacidad</a></li>
+                    <li class="mb-2"><a href="PoliticaDomicilios.html?v=1" style="color: #999; text-decoration: none;">Política de domicilios</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Sede -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">SEDE</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem; color: #999;">
+                    <li class="mb-2">
+                        <i class="fas fa-map-marker-alt mr-2" style="color: #FFD700;"></i>
+                        Calle 79 # 3bn97 (Floralia), Cali
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-clock mr-2" style="color: #FFD700;"></i>
+                        Lun – Dom: 10:00 a.m. – 2:00 a.m.
+                    </li>
+                    <li class="mb-2">
+                        <i class="fab fa-whatsapp mr-2" style="color: #FFD700;"></i>
+                        <a href="https://wa.me/573186408080" style="color: #999; text-decoration: none;" target="_blank">318 640 8080</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Copyright -->
+        <hr style="border: none; border-top: 1px solid #333;">
+        <p class="text-center mb-0" style="color: #666; font-size: 0.85rem; padding: 15px 0;">
+            © 2026 Licores La 79 — Todos los derechos reservados
+        </p>
+    </div>
+</footer>
+
+<!-- AVISO LEGAL -->
+<footer class="text-center" style="background-color: #0a0a0a; padding: 12px 0;">
+    <p class="mb-0" style="color: #555; font-size: 0.75rem;">
+        El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Prohíbase el expendio de bebidas embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994.
+    </p>
+</footer>   
+
+</body>
+</html>   

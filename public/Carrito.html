@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Tu Carrito - Licores la 79</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Library/bootstrap-4.6.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="Library/jquery-3.6.0.js"></script>
+    <script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
+    <link rel="icon" type="image/ico" href="images/botella.ico.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <style>
+        /* Estilos generales */
+        body { 
+            background-color: #0a0a0a !important; 
+            color: #ffffff !important; 
+            font-family: 'Figtree', sans-serif; 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+        }
+        h1, h2, h3, h4, h5 { font-family: 'Fraunces', serif; }
+        .main-content { flex: 1; }
+        
+        /* Estilos para las tarjetas de productos */
+        .cart-card {
+            background-color: #141414;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .summary-card {
+            background-color: #141414;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 25px;
+        }
+        .btn-dorado {
+            background-color: #FFD700;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-dorado:hover {
+            background-color: #f1c40f;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR PRINCIPAL -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000; border-bottom: 1px solid #222;">
+    <a class="navbar-brand" href="index.html" style="padding-left: 3rem;">
+        <img src="images/licores79.png" alt="Licores 79" style="max-height: 100px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ml-auto mr-5">
+            <li class="nav-item">
+                <a class="nav-link" href="FormTest.html" title="Ingresar" style="color: #FFD700; font-size: 1.2rem; margin-right: 15px;">
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Carrito.html" title="Carrito" style="color: #FFD700; font-size: 1.2rem;">
+                    <i class="fas fa-cart-shopping"></i><span class="badge-carrito" hidden>0</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- CONTENIDO DEL CARRITO -->
+<div class="container my-5 main-content">
+    <h2 class="mb-4" style="color: #FFD700;">Mi Carrito de Compras</h2>
+    
+    <div class="row">
+        <!-- Lista de Productos -->
+        <div class="col-lg-8" id="cartItemsContainer">
+            <!-- Se llena dinámicamente -->
+        </div>
+
+       <!-- RESUMEN Y OPCIONES DE ENVÍO -->
+<div class="col-lg-4">
+    <div class="summary-card">
+        <h4 style="color: #FFD700;" class="mb-4">Envío</h4>
+        
+        
+        <!-- Input independiente para la Dirección -->
+<!-- Input para la Dirección manual -->
+<div class="mb-3">
+    <label class="form-label">Dirección (Domicilios únicamente en Cali) *</label>
+    <input type="text" id="inputDireccionManual" class="form-control" placeholder="Calle 0 # 0 - 0">
+    <small id="errorDireccion" class="text-danger font-weight-bold" style="display: none;">Ingresa una dirección válida.</small>
+</div>
+
+<!-- Input para el Barrio con autocompletado -->
+<div class="mb-3 position-relative">
+    <label class="form-label">Barrio *</label>
+    <input type="text" id="inputBarrio" class="form-control" placeholder="Escribe tu barrio...">
+    <div id="listaBarriosSugerencias" class="list-group position-absolute w-100 shadow-sm" style="z-index: 1000; display: none; background: #222; border-radius: 5px;"></div>
+    <small id="errorBarrio" class="text-danger font-weight-bold" style="display: none;">Selecciona o escribe un barrio de Cali.</small>
+</div>
+
+<!-- Textarea para la Referencia (Opcional) -->
+<div class="form-group mt-3">
+    <label for="referenciaEntrega">
+        Referencia <small class="text-muted">(Opcional)</small>
+    </label>
+    <textarea
+        id="referenciaEntrega"
+        class="form-control"
+        rows="3"
+        placeholder="Ejemplo: casa esquinera de rejas negras, frente al parque."
+    ></textarea>
+</div>
+
+<!-- Botón para confirmar datos de envío -->
+<button type="button" id="btnConfirmarDireccion" class="btn btn-warning w-100 font-weight-bold mt-2">Confirmar datos de envío</button>
+
+        <h5 style="color: #FFD700;" class="mb-3 font-weight-bold" style="font-size: 1.1rem;">Opciones de envío</h5>
+
+        <!-- Tarjeta de Opción Programada -->
+        <div class="card bg-dark border-secondary mb-4 p-3 rounded" style="cursor: pointer;" id="cardProgramada">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="d-flex align-items-center mb-1">
+                        <i class="far fa-calendar-alt mr-2" style="color: #FFD700; font-size: 1.2rem;"></i>
+                        <strong class="text-white">Entrega Programada:</strong>
+                    </div>
+                    <p class="text-muted mb-2" style="font-size: 0.82rem;" id="textoProgramacion">Elige fecha y hora en la que te gustaría recibir tus productos.</p>
+                    <a href="#" id="btnAbrirModalFecha" style="color: #FFD700; font-size: 0.9rem; font-weight: bold; text-decoration: none;">
+                        Elegir fecha y hora
+                    </a>
+                </div>
+                <div>
+                    <input type="radio" name="opcionEnvio" checked style="accent-color: #FFD700; transform: scale(1.2);">
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3 pt-2 border-top border-secondary" style="font-size: 1.2rem;">
+            <span>Total:</span>
+            <strong id="cartTotal" style="color: #FFD700;">$ 0</strong>
+        </div>
+
+        <button class="btn btn-warning w-100 font-weight-bold mt-2" id="btnContinuarAlPago">
+            Continuar al pago
+        </button>
+      
+        
+                    <!-- SECCIÓN DE MÉTODO DE PAGO (Oculta por defecto hasta que presione Continuar al pago) -->
+                    <div id="seccionMetodoPago" class="card bg-dark text-white p-4 mt-4 border-secondary" style="display: none;">
+                        <h3 class="text-dorado mb-3 font-weight-bold">Pago</h3>
+                        <p class="text-muted mb-4">Selecciona tu método de pago:</p>
+        
+                        <div class="form-check d-flex align-items-center justify-content-between p-3 mb-2 bg-secondary rounded">
+                            <div>
+                                <input class="form-check-input ml-0 mr-2" type="radio" name="metodoPago" id="pagoTarjeta" value="tarjeta" checked>
+                                <label class="form-check-label font-weight-bold text-white ml-4" for="pagoTarjeta">Tarjeta crédito y débito</label>
+                            </div>
+                            <div>
+                                <i class="fab fa-cc-mastercard fa-2x text-warning mr-2"></i>
+                                <i class="fab fa-cc-visa fa-2x text-light"></i>
+                            </div>
+                        </div>
+        
+                        <div class="form-check d-flex align-items-center justify-content-between p-3 mb-2 bg-secondary rounded">
+                            <div>
+                                <input class="form-check-input ml-0 mr-2" type="radio" name="metodoPago" id="pagoPse" value="pse">
+                                <label class="form-check-label font-weight-bold text-white ml-4" for="pagoPse">PSE (Pagos Seguros en Línea)</label>
+                            </div>
+                            <div>
+                                <span class="badge badge-light px-2 py-1 font-weight-bold text-primary">PSE</span>
+                            </div>
+                        </div>
+        
+                        <div class="form-check d-flex align-items-center justify-content-between p-3 mb-4 bg-secondary rounded">
+                            <div>
+                                <input class="form-check-input ml-0 mr-2" type="radio" name="metodoPago" id="pagoEfectivo" value="contraentrega">
+                                <label class="form-check-label font-weight-bold text-white ml-4" for="pagoEfectivo">Efectivo / Pago contraentrega</label>
+                            </div>
+                            <div>
+                                <i class="fas fa-money-bill-wave fa-2x text-success"></i>
+                            </div>
+                        </div>
+        
+                        <button type="button" id="btnPagarAhora" class="btn btn-warning w-100 font-weight-bold mt-2">
+                            Pagar ahora
+                        </button>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 2: ENTREGA PROGRAMADA CON RANGO DE HORAS (11:00 AM - 1:00 AM) -->
+<div class="modal fade" id="modalEntregaProgramada" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark text-white border border-secondary" style="border-radius: 16px;">
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body px-4 pb-4">
+                <h3 class="font-weight-bold text-white mb-1">Entrega programada</h3>
+                <p class="text-muted mb-4" style="font-size: 0.9rem;">Elige una fecha y hora de entrega</p>
+                
+                <div class="form-group mb-3">
+                    <label class="text-muted" style="font-size: 0.85rem;">Fecha de entrega</label>
+                    <input type="date" class="form-control bg-secondary text-white border-0 py-3" id="inputFechaEntrega" style="border-radius: 20px;">
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="text-muted" style="font-size: 0.85rem;">Hora de entrega (11:00 a.m. – 1:00 a.m.)</label>
+                    <select class="form-control bg-secondary text-white border-0 py-2" id="selectHoraEntrega" style="border-radius: 20px; height: 48px;">
+                        <option value="11:00 a.m.">11:00 a.m.</option>
+                        <option value="12:00 p.m.">12:00 p.m. (Mediodía)</option>
+                        <option value="01:00 p.m.">01:00 p.m.</option>
+                        <option value="02:00 p.m.">02:00 p.m.</option>
+                        <option value="03:00 p.m.">03:00 p.m.</option>
+                        <option value="04:00 p.m.">04:00 p.m.</option>
+                        <option value="05:00 p.m.">05:00 p.m.</option>
+                        <option value="06:00 p.m.">06:00 p.m.</option>
+                        <option value="07:00 p.m.">07:00 p.m.</option>
+                        <option value="08:00 p.m.">08:00 p.m.</option>
+                        <option value="09:00 p.m.">09:00 p.m.</option>
+                        <option value="10:00 p.m.">10:00 p.m.</option>
+                        <option value="11:00 p.m.">11:00 p.m.</option>
+                        <option value="12:00 a.m.">12:00 a.m. (Medianoche)</option>
+                        <option value="01:00 a.m.">01:00 a.m.</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn btn-dorado btn-block py-3 font-weight-bold" id="btnGuardarFecha" style="border-radius: 25px;">
+                    Continuar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background-color: #111; color: #ccc; padding: 40px 0 0 0; margin-top: 50px;">
+    <div class="container">
+        <p class="text-center mb-0" style="color: #666; font-size: 0.85rem; padding-bottom: 20px;">© 2026 Licores La 79 — Todos los derechos reservados</p>
+    </div>
+</footer>
+
+
+</body>
+</html>
+
+<!-- FOOTER -->
+<footer style="background-color: #111; color: #ccc; padding: 50px 0 0 0;">
+    <div class="container">
+        <div class="row">
+
+            <!-- Columna 1: Logo + Descripción + Redes -->
+            <div class="col-md-3 mb-4">
+                <img src="images/licores79.png" alt="Licores 79" style="max-height: 70px; margin-bottom: 15px;">
+                <p style="color: #999; font-size: 0.9rem;">
+                    La mejor selección de licores con entrega rápida en Cali.
+                </p>
+                <div class="d-flex">
+                    <a href="https://instagram.com/guille_licoresla79" target="_blank" rel="noopener noreferrer" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/guillermo.murillo.854110" target="_blank" rel="noopener noreferrer" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@licoresla79" target="_blank" rel="noopener noreferrer" style="color: #FFD700; font-size: 1.3rem;">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Columna 2: Tienda -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">NUESTRA TIENDA</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem;">
+                    <li class="mb-2"><a href="index.html" style="color: #999; text-decoration: none;">Inicio</a></li>
+                    <li class="mb-2"><a href="#" style="color: #999; text-decoration: none;">Categorías</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Legal -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">LEGAL</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem;">
+                    <li class="mb-2"><a href="PreguntasFrecuentes.html?v=1" style="color: #999; text-decoration: none;">Preguntas frecuentes</a></li>
+                    <li class="mb-2"><a href="TerminosCondiciones.html?v=1" style="color: #999; text-decoration: none;">Términos y condiciones</a></li>
+                    <li class="mb-2"><a href="PoliticaPrivacidad.html?v=1" style="color: #999; text-decoration: none;">Política de privacidad</a></li>
+                    <li class="mb-2"><a href="PoliticaDomicilios.html?v=1" style="color: #999; text-decoration: none;">Política de domicilios</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Sede -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">SEDE</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem; color: #999;">
+                    <li class="mb-2">
+                        <i class="fas fa-map-marker-alt mr-2" style="color: #FFD700;"></i>
+                        Calle 79 # 3bn97 (Floralia), Cali
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-clock mr-2" style="color: #FFD700;"></i>
+                        Lun – Dom: 10:00 a.m. – 2:00 a.m.
+                    </li>
+                    <li class="mb-2">
+                        <i class="fab fa-whatsapp mr-2" style="color: #FFD700;"></i>
+                        <a href="https://wa.me/573186408080" style="color: #999; text-decoration: none;" target="_blank">318 640 8080</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #333;">
+        <p class="text-center mb-0" style="color: #666; font-size: 0.85rem; padding: 15px 0;">
+            © 2026 Licores La 79 — Todos los derechos reservados
+        </p>
+    </div>
+</footer>
+
+<!-- AVISO LEGAL -->
+<footer class="text-center" style="background-color: #0a0a0a; padding: 12px 0;">
+    <p class="mb-0" style="color: #555; font-size: 0.75rem;">
+        El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Prohíbase el expendio de bebidas embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994.
+    </p>
+</footer> 
+
+<script src="js/carrito.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/carrito-page.js"></script>
+</body>
+</html>

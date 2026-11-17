@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Preguntas Frecuentes - Licores la 79</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Library/bootstrap-4.6.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="Library/jquery-3.6.0.js"></script>
+    <script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
+    <link rel="icon" type="image/ico" href="images/botella.ico.ico" />
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <style>
+        body { background-color: #000; color: #fff; }
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-category { color: #FFD700; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
+        .faq-question { background-color: #1a1a1a; border: 1px solid #333; border-radius: 4px; padding: 15px 20px; margin-bottom: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+        .faq-question:hover { background-color: #2a2a2a; }
+        .faq-question .arrow { color: #FFD700; transition: transform 0.3s; }
+        .faq-question.active .arrow { transform: rotate(180deg); }
+        .faq-answer { background-color: #111; border: 1px solid #333; border-top: none; border-radius: 0 0 4px 4px; padding: 15px 20px; margin-top: -8px; margin-bottom: 8px; color: #ccc; font-size: 0.95rem; line-height: 1.6; }
+        .badge-highlight { background-color: #1a1a1a; border: 1px solid #333; border-radius: 4px; padding: 10px 15px; text-align: center; font-size: 0.85rem; color: #FFD700; font-weight: bold; }
+        .breadcrumb a { color: #FFD700; text-decoration: none; }
+        .breadcrumb .breadcrumb-item.active { color: #999; }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR PRINCIPAL -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
+    <a class="navbar-brand" href="index.html" style="padding-left: 3rem;">
+        <img src="images/licores79.png" alt="Licores 79" style="max-height: 120px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+        <form class="form-inline ml-auto mr-5">
+            <input class="form-control form-control-sm mr-2" type="text" placeholder="Buscar Productos...">
+            <button class="btn btn-sm" style="background-color: #FFD700;" type="submit">
+    <i class="fas fa-search" style="color: #000;"></i>
+</button>   
+        </form>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="FormTest.html" title="Ingresar">
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Carrito.html" title="Carrito">
+                    <i class="fas fa-cart-shopping"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- NAVBAR DE CATEGORÍAS -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categorias">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="categorias">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Vinos</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Vino Tinto</a>
+                    <a class="dropdown-item" href="#">Vino Blanco</a>
+                    <a class="dropdown-item" href="#">Vino Rosado</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Whisky</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Whisky Escocés</a>
+                    <a class="dropdown-item" href="#">Whisky Canadiense</a>
+                    <a class="dropdown-item" href="#">Whisky Americano</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Tequilas</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Blanco</a>
+                    <a class="dropdown-item" href="#">Reposado</a>
+                    <a class="dropdown-item" href="#">Añejo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Licores</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Ron</a>
+                    <a class="dropdown-item" href="#">Vodka</a>
+                    <a class="dropdown-item" href="#">Gin</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Cervezas</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Nacionales</a>
+                    <a class="dropdown-item" href="#">Importadas</a>
+                    <a class="dropdown-item" href="#">Artesanales</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Coctelería</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Kit Coctelería</a>
+                    <a class="dropdown-item" href="#">Mezcladores</a>
+                    <a class="dropdown-item" href="#">Vasos</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Bebidas y Alimentos</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Snacks</a>
+                    <a class="dropdown-item" href="#">Bebidas No Alcohólicas</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Otros</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Accesorios</a>
+                    <a class="dropdown-item" href="#">Regalos</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger font-weight-bold" href="#">+ Ofertas +</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- CONTENIDO FAQ -->
+<section class="faq-section py-5">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+            <li class="breadcrumb-item active">Preguntas frecuentes</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-4">
+        <h5 class="text-uppercase font-weight-bold mb-2" style="letter-spacing: 2px;">Centro de Ayuda</h5>
+        <h2 class="font-weight-bold">Preguntas frecuentes sobre Licores la 79</h2>
+        <p class="text-muted mt-2">Encuentra respuestas rápidas sobre domicilios, pagos, productos y horarios.</p>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-6 col-md-3 mb-2">
+            <div class="badge-highlight"><i class="fas fa-truck mr-1"></i> Domicilio en 30-60 min</div>
+        </div>
+        <div class="col-6 col-md-3 mb-2">
+            <div class="badge-highlight"><i class="fas fa-check-circle mr-1"></i> 100% originales</div>
+        </div>
+        <div class="col-6 col-md-3 mb-2">
+            <div class="badge-highlight"><i class="fas fa-credit-card mr-1"></i> Todos los métodos</div>
+        </div>
+        <div class="col-6 col-md-3 mb-2">
+            <div class="badge-highlight"><i class="fas fa-map-marker-alt mr-1"></i> Cubrimos todo Cali</div>
+        </div>
+    </div>
+
+    <!-- DOMICILIOS -->
+    <div class="mb-4">
+        <p class="faq-category mb-2">DOMICILIOS</p>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Cuánto se demora el domicilio de licor en Cali?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            Entregamos en 30 a 60 minutos en promedio dentro de Cali. Los pedidos al norte (San Luis, Jorge Eliécer Gaitán, Paso del Comercio, Los Alcázares y Petecuy, La Rivera, Guaduales, Calimio, Brisas de los Álamos, Álamos, Prados del Norte, La Flora y La Flora Industrial) suelen llegar más rápido. En horas pico (viernes y sábado en la noche) puede demorar un poco más.
+        </div>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Hacen domicilios 24 horas?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            Atendemos todos los días de 10:00 a.m. a 2:00 a.m. Si necesitas algo después de esa hora, escríbenos por WhatsApp y te confirmamos disponibilidad.
+        </div>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Cuánto cuesta el domicilio?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            El costo del domicilio depende de la zona de entrega. En zonas cercanas a Floralia el envío es muy bajo o gratis según el monto del pedido. Te lo confirmamos antes de cobrar.
+        </div>
+    </div>
+
+    <!-- PAGOS -->
+    <div class="mb-4">
+        <p class="faq-category mb-2">PAGOS</p>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Qué métodos de pago aceptan?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            Aceptamos efectivo, tarjeta débito y crédito (Visa, Mastercard, AMEX), Nequi, Daviplata, Bancolombia a la mano y transferencias por PSE. También puedes pagar contra entrega.
+        </div>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Es seguro pagar en línea?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            Sí. Todas las transacciones en línea se procesan a través de pasarelas certificadas con cifrado bancario. Nunca almacenamos los datos de tu tarjeta.
+        </div>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div class="mb-4">
+        <p class="faq-category mb-2">PRODUCTOS</p>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Los licores son originales?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            100% originales. Trabajamos con distribuidores autorizados de cada marca. Cada botella incluye sello, estampilla y código de autenticidad. Si tienes dudas, te enviamos foto o video del producto antes del despacho.
+        </div>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Tienen licores premium e importados?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            Sí, tenemos amplio catálogo de whisky escocés, bourbon, tequila 100% agave, ron añejo, ginebras premium, cervezas importadas y vinos seleccionados. Si buscas algo específico que no veas en la web, escríbenos y lo conseguimos.
+        </div>
+    </div>
+
+    <!-- PEDIDOS -->
+    <div class="mb-4">
+        <p class="faq-category mb-2">PEDIDOS</p>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Puedo programar un pedido para más tarde?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            Sí. En el carrito puedes elegir la hora de entrega o pedirnos por WhatsApp que coordinemos un horario específico. Es ideal para fiestas, cumpleaños o eventos corporativos.
+        </div>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Hacen pedidos para empresas y eventos?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            Sí. Atendemos eventos corporativos, matrimonios, grados y fiestas. Para pedidos grandes ofrecemos precios especiales y entrega coordinada. Escríbenos a nuestro WhatsApp 3186408080 con los detalles.
+        </div>
+    </div>
+
+    <!-- POLÍTICA -->
+    <div class="mb-4">
+        <p class="faq-category mb-2">POLÍTICA</p>
+
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Le venden licor a menores de edad?</span>
+            <i class="fas fa-chevron-down arrow"></i>
+        </div>
+        <div class="faq-answer collapse">
+            No. Está prohibido por ley colombiana. Todo cliente debe ser mayor de 18 años. El domiciliario verifica la cédula al momento de la entrega.
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-5">
+        <h5>¿No encuentras tu respuesta?</h5>
+        <a href="https://wa.me/573186408080" class="btn btn-success mt-2" target="_blank">
+            <i class="fab fa-whatsapp mr-2"></i>Escríbenos por WhatsApp
+        </a>
+    </div>
+
+</section>
+
+<!-- LÍNEA SEPARADORA -->
+<hr style="border: none; border-top: 1px solid #333; margin: 40px 0 0 0;">
+
+<!-- FOOTER -->
+<footer style="background-color: #111; color: #ccc; padding: 50px 0 0 0;">
+    <div class="container">
+        <div class="row">
+
+            <!-- Columna 1: Logo + Descripción + Redes -->
+            <div class="col-md-3 mb-4">
+                <img src="images/licores79.png" alt="Licores 79" style="max-height: 70px; margin-bottom: 15px;">
+                <p style="color: #999; font-size: 0.9rem;">La mejor selección de licores con entrega rápida en Cali.</p>
+                <div class="d-flex">
+                    <a href="https://instagram.com/guille_licoresla79" target="_blank" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" target="_blank" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" target="_blank" style="color: #FFD700; font-size: 1.3rem;">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Columna 2: Tienda -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">NUESTRA TIENDA</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem;">
+                    <li class="mb-2"><a href="index.html" style="color: #999; text-decoration: none;">Inicio</a></li>
+                    <li class="mb-2"><a href="#" style="color: #999; text-decoration: none;">Categorías</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Legal -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">LEGAL</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem;">
+                    <li class="mb-2"><a href="PreguntasFrecuentes.html?v=1" style="color: #999; text-decoration: none;">Preguntas frecuentes</a></li>
+                    <li class="mb-2"><a href="TerminosCondiciones.html?v=1" style="color: #999; text-decoration: none;">Términos y condiciones</a></li>
+                    <li class="mb-2"><a href="PoliticaPrivacidad.html?v=1" style="color: #999; text-decoration: none;">Política de privacidad</a></li>
+                    <li class="mb-2"><a href="PoliticaDomicilios.html?v=1" style="color: #999; text-decoration: none;">Política de domicilios</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Sede -->
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">SEDE</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem; color: #999;">
+                    <li class="mb-2">
+                        <i class="fas fa-map-marker-alt mr-2" style="color: #FFD700;"></i>
+                        Calle 79 # 3bn97 (Floralia), Cali
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-clock mr-2" style="color: #FFD700;"></i>
+                        Lun – Dom: 10:00 a.m. – 2:00 a.m.
+                    </li>
+                    <li class="mb-2">
+                        <i class="fab fa-whatsapp mr-2" style="color: #FFD700;"></i>
+                        <a href="https://wa.me/573186408080" style="color: #999; text-decoration: none;" target="_blank">318 640 8080</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Copyright -->
+        <hr style="border: none; border-top: 1px solid #333;">
+        <p class="text-center mb-0" style="color: #666; font-size: 0.85rem; padding: 15px 0;">
+            © 2026 Licores La 79 — Todos los derechos reservados
+        </p>
+    </div>
+</footer>
+
+<!-- AVISO LEGAL -->
+<footer class="text-center" style="background-color: #0a0a0a; padding: 12px 0;">
+    <p class="mb-0" style="color: #555; font-size: 0.75rem;">
+        El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Prohíbase el expendio de bebidas embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994.
+    </p>
+</footer>   
+
+<!-- SCRIPT -->
+<script>
+function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const wasOpen = el.classList.contains('active');
+    document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
+    if (!wasOpen) {
+        el.classList.add('active');
+        answer.classList.add('show');
+    }
+}
+</script>
+
+</body>
+</html>   

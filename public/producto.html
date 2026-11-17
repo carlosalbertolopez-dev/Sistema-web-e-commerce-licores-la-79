@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Detalle del Producto - Licores la 79</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Library/bootstrap-4.6.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="Library/jquery-3.6.0.js"></script>
+    <script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
+    <link rel="icon" type="image/ico" href="images/botella.ico.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <style>
+        body { 
+            background-color: #0a0a0a !important; 
+            color: #ffffff !important; 
+            font-family: 'Figtree', sans-serif; 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+        }
+        h1, h2, h3, h4, h5 { font-family: 'Fraunces', serif; }
+        
+        .main-content { flex: 1; }
+        .product-container { 
+            background-color: #141414; 
+            border: 1px solid #333; 
+            border-radius: 10px; 
+            padding: 30px; 
+            margin-top: 20px; 
+        }
+        .btn-dorado { 
+            background-color: #FFD700; 
+            color: #000; 
+            font-weight: bold; 
+            border: none; 
+            transition: all 0.3s ease;
+        }
+        .btn-dorado:hover { 
+            background-color: #f1c40f; 
+            color: #000; 
+        }
+
+        /* Estilos de Pestañas (Tabs) */
+        .nav-tabs .nav-link {
+            color: #888;
+            border: 1px solid transparent;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .nav-tabs .nav-link:hover {
+            color: #FFD700;
+            border-color: transparent;
+        }
+        .nav-tabs .nav-link.active {
+            color: #ffffff !important;
+            background-color: transparent !important;
+            border-color: #555 #555 transparent #555 !important;
+            font-weight: bold;
+        }
+
+        /* Gaveta Lateral (Offcanvas Cart) */
+        #cartDrawer {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    height: 100vh;
+    background-color: #141414;
+    border-left: 1px solid #333;
+    box-shadow: -5px 0 25px rgba(0,0,0,.8);
+    z-index: 1050;
+    transition: right .3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: #fff;
+}
+
+#cartDrawer.open {
+    right: 0;
+}
+
+#drawerItems img{
+    transition:.3s;
+}
+
+#drawerItems img:hover{
+    transform:scale(1.05);
+}
+
+.btn-plus,
+.btn-minus{
+    width:35px;
+    height:35px;
+    padding:0;
+}
+
+.btn-plus:hover,
+.btn-minus:hover{
+    background:#FFD700;
+    color:#000;
+    border-color:#FFD700;
+}
+
+        .drawer-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.7); z-index: 1040; display: none;
+        }
+        .drawer-overlay.open { display: block; }
+
+        .toast-cart{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+
+    background: #198754;
+    color: white;
+
+    padding: 14px 18px;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+
+    opacity: 0;
+    transform: translateX(100px);
+
+    transition: all .3s ease;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.4);
+
+    pointer-events: none;
+}
+
+.toast-cart.show{
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+}
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR PRINCIPAL -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000; border-bottom: 1px solid #222;">
+    <a class="navbar-brand" href="index.html" style="padding-left: 3rem;">
+        <img src="images/licores79.png" alt="Licores 79" style="max-height: 100px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ml-auto mr-5">
+            <li class="nav-item">
+                <a class="nav-link" href="FormTest.html" title="Ingresar" style="color: #FFD700; font-size: 1.2rem; margin-right: 15px;">
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Carrito.html" title="Carrito" style="color: #FFD700; font-size: 1.2rem;">
+                    <i class="fas fa-cart-shopping"></i><span class="badge-carrito" hidden>0</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="container my-4 main-content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent p-0">
+            <li class="breadcrumb-item"><a href="index.html" style="color: #FFD700;">Inicio</a></li>
+            <li class="breadcrumb-item text-muted">Licores</li>
+            <li class="breadcrumb-item active text-white" id="breadcrumbNombre">Detalle</li>
+        </ol>
+    </nav>
+
+    <div class="product-container">
+        <div class="row align-items-center">
+            <!-- Imagen del Producto -->
+            <div class="col-md-5 text-center mb-4 mb-md-0">
+                <img id="prodImg" src="" alt="Producto" style="max-height: 350px; width: auto; object-fit: contain; background: #ffffff; padding: 15px; border-radius: 8px;">
+            </div>
+
+            <!-- Información y Controles -->
+            <div class="col-md-7">
+                <h2 id="prodNombre" class="text-white mb-2">Cargando...</h2>
+                <h3 id="prodPrecio" style="color: #FFD700;" class="font-weight-bold mb-4">$ 0</h3>
+
+                <!-- Controles de Cantidad y Botón Añadir -->
+                <div class="d-flex align-items-center mb-3">
+                    <div class="input-group" style="width: 130px; margin-right: 15px;">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary text-white" type="button" id="btnMinus">-</button>
+                        </div>
+                        <input type="text" id="prodQty" class="form-control text-center bg-dark text-white border-secondary" value="1" readonly>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary text-white" type="button" id="btnPlus">+</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-dorado btn-lg flex-grow-1 py-2" id="btnAddDetail">
+                        Añadir al carrito <i class="fas fa-check ml-1"></i>
+                    </button>
+                </div>
+
+                <div class="mb-4">
+                    <a href="index.html" style="color: #FFD700; text-decoration: none;" class="font-weight-bold">
+                        <i class="fas fa-arrow-left mr-1"></i> Seguir Comprando
+                    </a>
+                </div>
+
+                <hr style="border-color: #333;">
+
+                <!-- Pestañas informativas -->
+                <ul class="nav nav-tabs border-secondary mb-3" id="infoTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab">Detalles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab">Envíos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="help-tab" data-toggle="tab" href="#help" role="tab">Ayuda</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="infoTabContent" style="font-size: 0.9rem;">
+                    <div class="tab-pane fade show active text-light" id="details" role="tabpanel">
+                        Buchanan’s es una de las marcas más famosas de whisky escocés en el mundo. En cada botella hay más de 100 años de experiencia, que dan como resultado una mezcla única con notas refinadas y gentiles.
+                    </div>
+                    <div class="tab-pane fade text-light" id="shipping" role="tabpanel">
+                        Tus pedidos serán entregados en un plazo aproximado de 60 minutos o programa tu horario de entrega ideal en el checkout. Recuerda que si realizas tu pedido después del cierre de la tienda, el pedido sera entregado el dia siguiente en el horario que escojas.
+                    </div>
+                    <div class="tab-pane fade text-light" id="help" role="tabpanel">
+                        Comunícate con nuestra línea de atención o vía WhatsApp al 318 640 8080 para soporte inmediato con tu pedido.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- GAVETA LATERAL DEL CARRITO (OFFCANVAS) -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div id="cartDrawer">
+    <div class="d-flex justify-content-between align-items-center pb-3 border-bottom border-secondary">
+        <h5 class="m-0" style="color: #FFD700;">Tu Carrito</h5>
+        <button class="btn btn-sm btn-dark text-white" id="closeDrawer"><i class="fas fa-times fa-lg"></i></button>
+    </div>
+    <div id="drawerItems" class="flex-grow-1 my-3 overflow-auto" style="max-height: 55vh;"></div>
+    <div class="pt-3 border-top border-secondary">
+        <div class="d-flex justify-content-between mb-3 font-weight-bold" style="font-size: 1.1rem;">
+            <span>Subtotal:</span>
+            <span id="drawerTotal" style="color: #FFD700;">$ 0</span>
+        </div>
+        <button
+    type="button"
+    id="btnContinuarComprando"
+    class="btn btn-dark btn-block py-3 mb-2">
+
+    CONTINUAR COMPRANDO
+
+</button>
+
+<a href="Carrito.html"
+   class="btn btn-dorado btn-block py-3">
+
+    IR AL CARRITO Y COMPRAR AHORA
+
+</a>
+    </div>
+</div>
+
+<section class="container my-5">
+
+    <h3
+        style="color:#FFD700;"
+        class="mb-4">
+
+        También te puede interesar
+
+    </h3>
+
+    <div
+        class="row"
+        id="productosRelacionados">
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer style="background-color: #111; color: #ccc; padding: 50px 0 0 0; margin-top: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <img src="images/licores79.png" alt="Licores 79" style="max-height: 70px; margin-bottom: 15px;">
+                <p style="color: #999; font-size: 0.9rem;">La mejor selección de licores con entrega rápida en Cali.</p>
+                <div class="d-flex">
+                    <a href="https://instagram.com/guille_licoresla79" target="_blank" rel="noopener noreferrer" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/guillermo.murillo.854110" target="_blank" rel="noopener noreferrer" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.tiktok.com/@licoresla79" target="_blank" rel="noopener noreferrer" style="color: #FFD700; font-size: 1.3rem;"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">NUESTRA TIENDA</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem;">
+                    <li class="mb-2"><a href="index.html" style="color: #999; text-decoration: none;">Inicio</a></li>
+                    <li class="mb-2"><a href="#" style="color: #999; text-decoration: none;">Categorías</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">LEGAL</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem;">
+                    <li class="mb-2"><a href="PreguntasFrecuentes.html?v=1" style="color: #999; text-decoration: none;">Preguntas frecuentes</a></li>
+                    <li class="mb-2"><a href="TerminosCondiciones.html?v=1" style="color: #999; text-decoration: none;">Términos y condiciones</a></li>
+                    <li class="mb-2"><a href="PoliticaPrivacidad.html?v=1" style="color: #999; text-decoration: none;">Política de privacidad</a></li>
+                    <li class="mb-2"><a href="PoliticaDomicilios.html?v=1" style="color: #999; text-decoration: none;">Política de domicilios</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">SEDE</h5>
+                <ul class="list-unstyled" style="font-size: 0.9rem; color: #999;">
+                    <li class="mb-2"><i class="fas fa-map-marker-alt mr-2" style="color: #FFD700;"></i> Calle 79 # 3bn97 (Floralia), Cali</li>
+                    <li class="mb-2"><i class="fas fa-clock mr-2" style="color: #FFD700;"></i> Lun – Dom: 10:00 a.m. – 2:00 a.m.</li>
+                    <li class="mb-2"><i class="fab fa-whatsapp mr-2" style="color: #FFD700;"></i> <a href="https://wa.me/573186408080" style="color: #999; text-decoration: none;" target="_blank">318 640 8080</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #333;">
+        <p class="text-center mb-0" style="color: #666; font-size: 0.85rem; padding: 15px 0;">© 2026 Licores La 79 — Todos los derechos reservados</p>
+    </div>
+</footer>
+<footer class="text-center" style="background-color: #0a0a0a; padding: 12px 0;">
+    <p class="mb-0" style="color: #555; font-size: 0.75rem;">El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Prohíbase el expendio de bebidas embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994.</p>
+</footer>
+
+<div id="toastCart" class="toast-cart">
+    <i class="fas fa-check-circle mr-2"></i>
+    <span id="toastText"></span>
+</div>
+
+<!-- SCRIPTS EXTERNOS -->
+<script src="js/carrito.js"></script>
+<script src="js/producto-detalle.js"></script>
+</body>
+</html>

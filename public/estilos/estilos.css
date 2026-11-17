@@ -1,0 +1,232 @@
+/* ====== FONDO OSCURO ====== */
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+/* ====== NAVBAR DE CATEGORÍAS ====== */
+.categorias-navbar {
+    background-color: #1a1a1a !important; /* fondo oscuro */
+    border-bottom: 2px solid #FFD700;     /* línea dorada abajo */
+}
+
+.categorias-navbar .nav-link {
+    color: #FFD700 !important; /* dorado */
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.categorias-navbar .nav-link:hover {
+    color: #fff !important; /* blanco al pasar el mouse */
+}
+
+/* Dropdown con fondo oscuro */
+.categorias-navbar .dropdown-menu {
+    background-color: #111;
+    border: 1px solid #FFD700;
+}
+
+.categorias-navbar .dropdown-item {
+    color: #FFD700;
+}
+
+.categorias-navbar .dropdown-item:hover {
+    background-color: #FFD700;
+    color: #000; /* negro para contraste */
+}
+
+/* Estilo especial para Ofertas */
+.ofertas-link {
+    color: #FFD700 !important;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}
+.ofertas-link:hover {
+    color: #fff !important;
+}
+
+
+/* ====== TÍTULOS ====== */
+h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+}
+
+/* ====== TEXTOS GENERALES ====== */
+p, small, span {
+    color: #ccc;
+}
+
+/* Iconos de la navbar en dorado */
+.navbar .fas {
+    color: #FFD700;
+}   
+
+/* ====== SECCIÓN OFERTAS / PROMOCIONES ====== */
+.card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+}
+
+.card .card-body h5,
+.card .card-body h6 {
+    color: #fff;
+}
+
+/* ====== SECCIÓN SERVICIOS ====== */
+.card.border {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+}
+
+.card.border h6 {
+    color: #fff;
+}
+
+/* ====== SECCIÓN HORARIOS ====== */
+.card.border.p-5 {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+}
+
+/* ====== NEWSLETTER ====== */
+/* El fondo dorado ya lo tienes con inline style, solo asegúrate que el texto sea oscuro */
+section[style*="FFD700"] h4,
+section[style*="FFD700"] p {
+    color: #000;
+}
+
+/* ====== LINKS ====== */
+a {
+    color: #FFD700;
+}
+
+a:hover {
+    color: #fff;
+}
+
+/* ====== BADGES ====== */
+.badge {
+    background-color: #333;
+    color: #FFD700;
+}   
+/* ====== CAROUSEL  ====== */
+  
+.carousel-item img {
+    object-fit: contain;
+    height: 400px;
+    width: 100%;
+    background-color: #000;
+} 
+
+.carousel-inner{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #FFD700;
+}
+/* ====== CARDS DE PRODUCTOS - BORDE DORADO + HOVER ====== */
+.card.producto {
+    border: 2px solid #FFD700;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.card.producto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+}
+
+.card.producto .card-img-top {
+    object-fit: contain;
+    height: 220px;
+    width: 100%;
+    background-color: #fff;
+}   
+
+.card.producto .card-body {
+    background-color: #111;
+    border-top: 1px solid #333;
+    padding: 10px;
+}   
+
+#mapaDireccion {
+    width: 100% !important;
+    height: 260px !important;
+    min-height: 260px !important;
+    border-radius: 16px;
+    z-index: 1;
+}
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+}
+
+.toast-l79{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    background: #198754;
+    color: white;
+
+    padding: 14px 18px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    z-index: 9999;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.35);
+
+    opacity: 0;
+
+    transform: translateY(-30px) scale(.9);
+
+    transition: all .4s ease;
+}
+
+.toast-l79.show{
+
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+
+    animation: toastBounce .5s ease;
+}
+
+@keyframes toastBounce {
+
+    0%{
+        transform: translateY(-30px) scale(.9);
+    }
+
+    60%{
+        transform: translateY(5px) scale(1.03);
+    }
+
+    100%{
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+.cart-card{
+    min-height:95px;
+}
+
+.cart-card h5{
+    margin-bottom:4px !important;
+}
+
+.cart-card img{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+}

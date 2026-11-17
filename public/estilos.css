@@ -1,0 +1,264 @@
+/* Licores la 79 — tema negro y latón. Respaldar el estilos.css anterior antes de reemplazar. */
+:root{
+  --negro:#0E0D0B; --carbon:#1a1a1a; --carbon-2:#211E19; --borde:#2D2923;
+  --oro:#D9B04A; --oro-claro:#EBCB7A; --vino:#D6455A;
+  --texto:#EDE7DA; --suave:#A89F8E;
+}
+html{scroll-behavior:smooth}
+body{background:var(--negro)!important;color:var(--texto);font-family:'Figtree',system-ui,sans-serif;font-size:1rem;line-height:1.6}
+h1,h2,h3,h4,h5,h6,.navbar-brand{font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spacing:.01em}
+h3,h4{color:var(--texto)}
+a{color:var(--oro)} a:hover{color:var(--oro-claro);text-decoration:none}
+.text-muted{color:var(--suave)!important}
+.text-dark{color:var(--texto)!important}
+.text-warning{color:var(--oro)!important}
+.text-primary{color:var(--oro)!important}
+.text-danger{color:var(--vino)!important}
+
+/* Barras de navegación */
+.navbar-dark{border-bottom:1px solid var(--borde)}
+.navbar.bg-white{background:var(--carbon)!important;border-bottom:1px solid var(--borde)}
+.navbar-light .navbar-nav .nav-link{color:var(--texto);font-weight:500;padding:.75rem 1rem}
+.navbar-light .navbar-nav .nav-link:hover{color:var(--oro)}
+.navbar-dark .navbar-nav .nav-link{color:var(--texto);font-size:1.15rem;position:relative}
+.navbar-dark .navbar-nav .nav-link:hover{color:var(--oro)}
+.dropdown-menu{background:var(--carbon-2);border:1px solid var(--borde);border-radius:6px}
+.dropdown-item{color:var(--texto)} .dropdown-item:hover{background:var(--borde);color:var(--oro)}
+.navbar .form-control{background:var(--carbon-2);border:1px solid var(--borde);color:var(--texto)}
+.navbar .form-control::placeholder{color:var(--suave)}
+.badge-carrito{position:absolute;top:0;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--oro);color:var(--negro);font:700 .7rem/18px 'Figtree',sans-serif;text-align:center;padding:0 5px}
+.badge-carrito[hidden]{display:none}
+.badge-carrito{
+  background:#FFD700;
+  color:#000;
+  border-radius:50%;
+  padding:2px 6px;
+  font-size:11px;
+  font-weight:bold;
+}
+.categorias-navbar{
+  border-top:1px solid #333;
+  border-bottom:1px solid #333;
+}
+
+.ofertas-link{
+  color:#ff4d4d !important;
+  font-weight:bold;
+}
+
+footer a:hover{
+  color:#FFD700 !important;
+}
+/* Botones */
+.btn{border-radius:4px;font-weight:700;letter-spacing:.02em}
+.btn-primary,.btn-success{background:var(--oro);border-color:var(--oro);color:var(--negro)}
+.btn-primary:hover,.btn-success:hover,.btn-primary:focus{background:var(--oro-claro);border-color:var(--oro-claro);color:var(--negro)}
+.btn-dark{background:var(--negro);border-color:var(--negro)}
+
+/* Tarjetas y productos */
+.card{background:var(--carbon);border:1px solid var(--borde);border-radius:8px;color:var(--texto)}
+/* ====== CARDS DE PRODUCTOS - BORDE DORADO + HOVER ====== */
+.card.producto {
+  border: 2px solid #FFD700;
+  background-color: #1a1a1a;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.card.producto:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+}
+
+.card.producto .card-img-top {
+  object-fit: contain;
+  height: 220px;
+  width: 100%;
+  background-color: #fff;
+}   
+
+.card.producto .card-body {
+  background-color: #111;
+  border-top: 1px solid #333;
+  padding: 10px;
+}   
+.producto{
+  background:#1a1a1a;
+  border:1px solid #333;
+  transition:.3s;
+}
+.producto:hover{
+  transform:translateY(-5px);
+  border-color:#FFD700;
+}
+.producto .card-body{
+  background:#1a1a1a;
+}
+.producto .badge{border-radius:3px;letter-spacing:.04em}
+.producto h6{font-family:'Figtree',sans-serif;font-weight:500;line-height:1.35}
+[data-add]{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--oro);border-radius:50%}
+[data-add]:hover{background:var(--oro)} [data-add]:hover i{color:var(--negro)!important}
+.carousel-inner img{max-height:520px;object-fit:cover}
+hr{border-color:var(--borde)}
+
+/* Formularios */
+.form-control{border-radius:4px}
+.form-control:focus{border-color:var(--oro);box-shadow:0 0 0 .15rem rgba(217,176,74,.25)}
+.form-msg{margin-top:.75rem;font-size:.9rem;min-height:1.2em}
+.form-msg.error{
+  color:var(--vino)} 
+.form-msg.ok{
+  color:#0d6efd;
+  font-weight:600;
+}
+:focus-visible{
+  outline:2px solid var(--oro);outline-offset:2px
+}
+
+/* Carrito */
+.cart-page{padding:2rem 15px 3rem}
+.cart-row{display:grid;grid-template-columns:84px 1fr auto;gap:1rem;align-items:center;background:var(--carbon);border:1px solid var(--borde);border-radius:8px;padding:.75rem;margin-bottom:.75rem}
+.cart-row img{width:84px;height:84px;object-fit:contain;background:#fff;border-radius:4px}
+.cart-row .nombre{font-weight:500}
+.cart-row .precio{color:var(--oro);font-weight:700}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--borde);border-radius:4px;margin-top:.35rem}
+.qty button{background:none;border:0;color:var(--texto);width:32px;height:32px;font-size:1.1rem}
+.qty button:hover{color:var(--oro)} .qty span{min-width:28px;text-align:center}
+.cart-row .quitar{background:none;border:0;color:var(--suave);font-size:.85rem;display:block;margin-top:.35rem;margin-left:auto}
+.cart-row .quitar:hover{color:var(--vino)}
+.cart-summary{background:var(--carbon);border:1px solid var(--borde);border-radius:8px;padding:1.5rem;position:sticky;top:1rem}
+.cart-summary strong{font-size:1.4rem;color:var(--oro);font-family:'Fraunces',serif}
+.cart-empty{text-align:center;padding:3rem 1rem;background:var(--carbon);border:1px dashed var(--borde);border-radius:8px}
+.cart-summary select option{background:var(--carbon-2)}
+.toast-l79{position:fixed;right:1rem;bottom:1rem;background:var(--oro);color:var(--negro);padding:.7rem 1rem;border-radius:6px;font-weight:700;z-index:2000;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+@media(max-width:575px){.cart-row{grid-template-columns:64px 1fr}.cart-row>:last-child{grid-column:1/-1;text-align:right}.cart-row img{width:64px;height:64px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+#mapaDireccion {
+  width: 100% !important;
+  height: 260px !important;
+  min-height: 260px !important;
+  border-radius: 16px;
+  z-index: 1;
+}
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+
+.toast-l79{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  background: #198754;
+  color: white;
+
+  padding: 14px 18px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  z-index: 9999;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+
+  opacity: 0;
+
+  transform: translateY(-30px) scale(.9);
+
+  transition: all .4s ease;
+}
+
+.toast-l79.show{
+
+  opacity: 1;
+
+  transform: translateY(0) scale(1);
+
+  animation: toastBounce .5s ease;
+}
+
+@keyframes toastBounce {
+
+  0%{
+      transform: translateY(-30px) scale(.9);
+  }
+
+  60%{
+      transform: translateY(5px) scale(1.03);
+  }
+
+  100%{
+      transform: translateY(0) scale(1);
+  }
+
+}
+
+.cart-card{
+  min-height:95px;
+}
+
+.cart-card h5{
+  margin-bottom:4px !important;
+}
+
+.cart-card img{
+  width:70px;
+  height:70px;
+  object-fit:contain;
+}
+
+/* Mensajes */
+.error-text,
+.success-text {
+    display: block;
+    min-height: 18px;
+    margin-top: 6px;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.error-text {
+    color: #FFD700;
+}
+
+.success-text {
+    color: #28a745;
+}
+
+/* Campo con advertencia */
+.input-error {
+    border: 1px solid #FFD700 !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, .35);
+}
+
+/* Campo válido */
+.input-success {
+    border: 1px solid #28a745 !important;
+    box-shadow: 0 0 10px rgba(40, 167, 69, .35);
+}
+
+/* Requisitos de contraseña */
+.password-rules{
+  margin-top:8px;
+  text-align:left;
+}
+
+.password-rules div{
+  font-size:13px;
+  margin-top:4px;
+  color:#999;
+  transition:.3s;
+}
+
+.password-rules .ok{
+  color:#28a745;
+}
+
+.password-rules .pending{
+  color:#FFD700;
+}

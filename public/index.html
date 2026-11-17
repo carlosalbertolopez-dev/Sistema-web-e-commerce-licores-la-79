@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Tienda y Licores la 79</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Library/bootstrap-4.6.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="Library/jquery-3.6.0.js"></script>
+    <script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
+    <link rel="icon" type="image/ico" href="images/botella.ico.ico" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <style>
+        /* Estilo para el botón flotante del carrito (Esquina inferior derecha) */
+        .cart-floating-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background-color: #000000;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none !important;
+        }
+
+        .cart-floating-btn:hover {
+            transform: scale(1.1);
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Badge numérico sobre el botón flotante y el navbar */
+        .cart-badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #FFD700;
+            color: #000000;
+            font-weight: bold;
+            font-size: 0.75rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #000000;
+        }
+
+        #cartDrawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100vh;
+            background: #141414;
+            border-left: 1px solid #333;
+            z-index: 1050;
+            transition: right .3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            color: #fff;
+        }
+
+        #cartDrawer.open {
+            right: 0;
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, .7);
+            display: none;
+            z-index: 1040;
+        }
+
+        .drawer-overlay.open {
+            display: block;
+        }
+
+        #btnContinuarComprando {
+            background-color: #2f353d;
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            height: 48px;
+            transition: all .3s ease;
+        }
+
+        #btnContinuarComprando:hover {
+            background-color: #3d444d;
+            color: #ffffff;
+        }
+
+        .btn-ir-carrito {
+            background-color: #FFD700;
+            border: none;
+            color: #000000 !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none !important;
+            transition: all .3s ease;
+        }
+
+        .btn-ir-carrito:hover {
+            background-color: #f5cc00;
+            color: #000000 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#000;">
+
+        <!-- Logo: con padding-left para moverlo a la derecha -->
+        <a class="navbar-brand" href="index.html" style="padding-left: 3rem;">
+            <img src="images/licores79.png" alt="Licores 79" style="max-height: 120px;">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <!-- Buscador + Iconos: sin ml-auto, con margin-left menor -->
+            <form class="form-inline ml-auto mr-5">
+                <input class="form-control form-control-sm mr-2" type="text" placeholder="Buscar Productos...">
+                <button class="btn btn-sm" style="background-color:#FFD700" type="submit">
+                    <i class="fas fa-search" style="color:#000"></i>
+                </button>
+            </form>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="FormTest.html" title="Ingresar">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Carrito.html" title="Carrito">
+                        <i class="fas fa-cart-shopping"></i><span class="badge-carrito" hidden>0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- NAVBAR DE CATEGORÍAS -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark categorias-navbar">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categorias">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="categorias">
+
+            <ul class="navbar-nav mr-auto">
+
+                <!-- VINOS -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        Vinos
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-subcategoria="Vino Tinto">
+                            Tinto
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Vino Blanco">
+                            Blanco
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Vino Rosado">
+                            Rosado
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Vino Espumoso">
+                            Espumoso
+                        </a>
+                    </div>
+                </li>
+
+                <!-- WHISKY -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        Whisky
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-subcategoria="Escocés">
+                            Escocés
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Single Malt">
+                            Single Malt
+                        </a>
+
+                        <a class="dropdown-item" href="#"data-subcategoria="Americano">
+                            Americano
+                        </a>
+                    </div>
+                </li>
+
+                <!-- TEQUILA -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        Tequila
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-subcategoria="Tequila Blanco">
+                            Blanco
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Tequila Reposado">
+                            Reposado
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Tequila Añejo">
+                            Añejo
+                        </a>
+                    </div>
+                </li>
+
+                <!-- CERVEZA -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        Cervezas
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-subcategoria="Nacional">
+                            Nacional
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Importada">
+                            Importada
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Artesanal">
+                            Artesanal
+                        </a>
+                    </div>
+                </li>
+
+                <!-- OTROS LICORES -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        Otros Licores
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-subcategoria="Aguardiente">
+                            Aguardiente
+                        </a>
+                        
+                        <a class="dropdown-item" href="#" data-subcategoria="Ron">
+                            Ron
+                        </a>
+                        
+                        <a class="dropdown-item" href="#" data-subcategoria="Vodka">
+                            Vodka
+                        </a>
+                        
+                        <a class="dropdown-item" href="#" data-subcategoria="Ginebra">
+                            Ginebra
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Cremas">
+                            Cremas
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Cognac">
+                            Cognac
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Brandy">
+                            Brandy
+                        </a>
+                    </div>
+                </li>
+
+                <!-- BEBIDAS Y ALIMENTOS -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        Bebidas y Alimentos
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-subcategoria="Snacks">
+                            Snacks
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Gaseosa">
+                            Gaseosa
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Energizante">
+                            Energizante
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Jugo">
+                            Jugo
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Agua">
+                            Agua
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-subcategoria="Hidratante">
+                            Hidratante
+                        </a>
+                    </div>
+                </li>
+
+                <!-- OFERTAS -->
+                <li class="nav-item">
+                    <a class="nav-link text-danger font-weight-bold" href="#">
+                        + OFERTAS +
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <!-- CAROUSEL -->
+    <!-- CAROUSEL -->
+    <section>
+        <div id="demo" class="carousel slide" data-ride="carousel" data-interval="2500">
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+                <li data-target="#demo" data-slide-to="3"></li>
+                <li data-target="#demo" data-slide-to="4"></li>
+                <li data-target="#demo" data-slide-to="5"></li>
+                <li data-target="#demo" data-slide-to="6"></li>
+            </ul>
+
+            <div class="carousel-inner">
+                <!-- 1. Vino: Pequeñas Producciones Malbec -->
+                <div class="carousel-item active">
+                    <img src="images/pequeñas-producciones-malbec.jpg"
+                        alt="Pequeñas Producciones Malbec - El mejor vino" class="d-block w-100">
+                </div>
+
+                <!-- 2. Whisky: Johnnie Walker Blue Label -->
+                <div class="carousel-item">
+                    <img src="images/johnnie-walker.jpg" alt="Johnnie Walker Blue Label - El mejor whisky"
+                        class="d-block w-100">
+                </div>
+
+                <!-- 3. Ron: Bacardí Blanco -->
+                <div class="carousel-item">
+                    <img src="images/bacardí-blanco.jpg" alt="Bacardi - El mejor ron" class="d-block w-100">
+                </div>
+
+                <!-- 4. Tequila: José Cuervo -->
+                <div class="carousel-item">
+                    <img src="images/jose-cuervo.jpg" alt="José Cuervo - El mejor tequila" class="d-block w-100">
+                </div>
+
+                <!-- 5. Cerveza: Corona -->
+                <div class="carousel-item">
+                    <img src="images/corona.jpg" alt="Corona - La mejor cerveza" class="d-block w-100">
+                </div>
+
+                <!-- 6. Vodka: Smirnoff -->
+                <div class="carousel-item">
+                    <img src="images/smirnoff.jpg" alt="Smirnoff - El mejor vodka" class="d-block w-100">
+                </div>
+
+                <!-- 7. Brandy: Conde de Osborne -->
+                <div class="carousel-item">
+                    <img src="images/conde-de-osborne.jpg" alt="Conde de Osborne - El mejor brandy"
+                        class="d-block w-100">
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="container my-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card border d-flex align-items-center p-3">
+                    <i class="fas fa-store fa-2x mr-3"></i>
+                    <div>
+                        <h6 class="font-weight-bold mb-0">Recoger en tienda</h6>
+                        <small class="text-muted">Tendremos listo tu pedido</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border d-flex align-items-center p-3">
+                    <i class="fas fa-truck fa-2x mr-3"></i>
+                    <div>
+                        <h6 class="font-weight-bold mb-0">Delivery programado</h6>
+                        <small class="text-muted">Programa día y hora</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border d-flex align-items-center p-3">
+                    <i class="fas fa-clock fa-2x mr-3"></i>
+                    <div>
+                        <h6 class="font-weight-bold mb-0">Entregas ágiles</h6>
+                        <small class="text-muted">máximo una hora</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border d-flex align-items-center p-3">
+                    <i class="fas fa-credit-card fa-2x mr-3"></i>
+                    <div>
+                        <h6 class="font-weight-bold mb-0">Métodos de pago</h6>
+                        <small class="text-muted">Tarjetas Débito/Crédito/PSE</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HORARIOS -->
+    <section class="container my-4">
+        <div class="row align-items-center">
+            <!-- Imagen de la moto -->
+            <div class="col-md-4 text-center">
+                <img src="images/moto-delivery.jpg" alt="Delivery" style="max-width: 100%;">
+            </div>
+
+            <!-- Info de horarios -->
+            <div class="col-md-8">
+                <div class="row align-items-center ml-5">
+                    <h4 class="text-white text-center mb-4 mt-4 ml-3" style="font-weight: bold;">Horarios</h4>
+                    <div class="card border p-5" style="background-color:#1a1a1a;border-color:#333;">
+
+                        <h5 class="font-weight-bold" style="color:#FFD700;">
+                            ABIERTO: LUNES A DOMINGO
+                        </h5>
+
+                        <hr style="border-color:#333">
+
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-clock fa-2x mr-3" style="color:#FFD700"></i>
+
+                            <span class="text-white">
+                                Pedidos 24/7 (Página Web)
+                            </span>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-shopping-bag fa-2x mr-3" style="color:#FFD700"></i>
+
+                            <span class="text-white">
+                                Escoge fecha/hora de entrega en el CheckOut
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER / SUSCRIPCIÓN -->
+    <section class="my-4" style="background-color:#FFD700;padding:40px 0;">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Izquierda: Texto -->
+                <div class="col-md-6" style="border-right: 2px solid var(--negro); padding-right: 30px;">
+                    <h4 class="font-weight-bold">Suscríbete a Licores la 79</h4>
+                    <p class="mb-0">Mantente informado sobre nuestros productos, eventos, promociones y marcas</p>
+                </div>
+
+                <!-- Derecha: Formulario -->
+                <div class="col-md-6 pl-4">
+                    <form data-api="suscribir">
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Tu nombre" name="nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Correo electrónico" name="email"
+                                required>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark mt-2">
+                            Enviar
+                        </button>
+
+                    </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROMOCIONES -->
+    <section class="container mt-4">
+        <h3 class="text-center">OFERTAS</h3>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <img src="images/whiskyGV.png" class="card-img-top" alt="Whisky">
+                    <div class="card-body">
+                        <h5>Whisky con 2 vasos</h5>
+                        <button type="button" class="btn btn-primary">Comprar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <img src="images/cerveza.png" class="card-img-top" alt="Cerveza">
+                    <div class="card-body">
+                        <h5>Cerveza con 1 vaso</h5>
+                        <button type="button" class="btn btn-primary">Comprar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <img src="images/botella de ron.png" class="card-img-top" alt="Ron">
+                    <div class="card-body">
+                        <h5>Ron con 2 vasos</h5>
+                        <button type="button" class="btn btn-primary">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MÁS VENDIDOS -->
+    <section class="container my-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="font-weight-bold" style="color: #FFD700;">MÁS VENDIDOS</h3>
+                <h4 class="text-muted mb-0">Productos destacados</h4>
+            </div>
+            <a href="mas-vendidos.html">
+                Ver todo →
+            </a>
+
+        </div>
+
+        <div class="row" id="contenedorProductos">
+        </div>
+
+        <!-- BOTÓN FLOTANTE DEL CARRITO -->
+        <a href="Carrito.html" class="cart-floating-btn" id="cartFloatingBtn" title="Ver carrito">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge-count" id="floatingCartCount">0</span>
+        </a>
+    </section>
+
+    <br><br>
+    <!-- LÍNEA SEPARADORA -->
+    <hr style="border: none; border-top: 1px solid #333; margin: 40px 0 0 0;">
+
+    <!-- FOOTER -->
+    <footer style="background-color: #111; color: #ccc; padding: 50px 0 0 0;">
+        <div class="container">
+            <div class="row">
+
+                <!-- Columna 1: Logo + Descripción + Redes -->
+                <div class="col-md-3 mb-4">
+                    <img src="images/licores79.png" alt="Licores 79" style="max-height: 70px; margin-bottom: 15px;">
+
+                    <p style="color: #999; font-size: 0.9rem;">
+                        La mejor selección de licores con entrega rápida en Cali.
+                    </p>
+
+                    <div class="d-flex">
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/guille_licoresla79" target="_blank" rel="noopener noreferrer"
+                            style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/guillermo.murillo.854110" target="_blank"
+                            rel="noopener noreferrer" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+
+                        <!-- TikTok -->
+                        <a href="https://www.tiktok.com/@licoresla79" target="_blank" rel="noopener noreferrer"
+                            style="color: #FFD700; font-size: 1.3rem;">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Tienda -->
+                <div class="col-md-3 mb-4">
+                    <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">NUESTRA
+                        TIENDA</h5>
+                    <ul class="list-unstyled" style="font-size: 0.9rem;">
+                        <li class="mb-2"><a href="index.html" style="color: #999; text-decoration: none;">Inicio</a>
+                        </li>
+                        <li class="mb-2"><a href="#" style="color: #999; text-decoration: none;">Categorías</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Legal -->
+                <div class="col-md-3 mb-4">
+                    <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">LEGAL</h5>
+                    <ul class="list-unstyled" style="font-size: 0.9rem;">
+                        <li class="mb-2"><a href="PreguntasFrecuentes.html?v=1"
+                                style="color: #999; text-decoration: none;">Preguntas frecuentes</a></li>
+                        <li class="mb-2"><a href="TerminosCondiciones.html?v=1"
+                                style="color: #999; text-decoration: none;">Términos y condiciones</a></li>
+                        <li class="mb-2"><a href="PoliticaPrivacidad.html?v=1"
+                                style="color: #999; text-decoration: none;">Política de privacidad</a></li>
+                        <li class="mb-2"><a href="PoliticaDomicilios.html?v=1"
+                                style="color: #999; text-decoration: none;">Política de domicilios</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Sede -->
+                <div class="col-md-3 mb-4">
+                    <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">SEDE</h5>
+                    <ul class="list-unstyled" style="font-size: 0.9rem; color: #999;">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt mr-2" style="color: #FFD700;"></i>
+                            Calle 79 # 3bn97 (Floralia), Cali
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock mr-2" style="color: #FFD700;"></i>
+                            Lun – Dom: 10:00 a.m. – 2:00 a.m.
+                        </li>
+                        <li class="mb-2">
+                            <i class="fab fa-whatsapp mr-2" style="color: #FFD700;"></i>
+                            <a href="https://wa.me/573186408080" style="color: #999; text-decoration: none;"
+                                target="_blank">318 640 8080</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <hr style="border: none; border-top: 1px solid #333;">
+            <p class="text-center mb-0" style="color: #666; font-size: 0.85rem; padding: 15px 0;">
+                © 2026 Licores La 79 — Todos los derechos reservados
+            </p>
+        </div>
+    </footer>
+    <!-- AVISO LEGAL -->
+    <footer class="text-center" style="background-color: #0a0a0a; padding: 12px 0;">
+        <p class="mb-0" style="color: #555; font-size: 0.75rem;">
+            El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Prohíbase el expendio de bebidas
+            embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994.
+        </p>
+    </footer>
+
+    <!-- OVERLAY -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- GAVETA DEL CARRITO -->
+    <div id="cartDrawer">
+
+        <div class="d-flex justify-content-between align-items-center pb-3 border-bottom border-secondary">
+            <h5 class="m-0" style="color:#FFD700;">
+                Tu carrito
+            </h5>
+            <button type="button" class="btn btn-sm btn-dark text-white" id="closeDrawer">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div id="drawerItems" class="flex-grow-1 my-3 overflow-auto" style="max-height:55vh;">
+        </div>
+
+        <div class="pt-3 border-top border-secondary">
+            <div class="d-flex justify-content-between mb-3 font-weight-bold">
+                <span>Subtotal:</span>
+                <span id="drawerTotal" style="color:#FFD700;">
+                    $ 0
+                </span>
+            </div>
+
+            <button type="button" id="btnContinuarComprando" class="btn btn-dark btn-block py-3 mb-2">
+                CONTINUAR COMPRANDO
+            </button>
+            <a href="Carrito.html" class="btn-ir-carrito">
+                IR AL CARRITO Y COMPRAR AHORA
+            </a>
+        </div>
+    </div>
+
+    <script src="js/carrito.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/productos.js"></script>
+</body>
+
+</html>

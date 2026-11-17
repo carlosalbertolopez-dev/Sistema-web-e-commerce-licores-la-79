@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Catálogo Completo - Licores La 79</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Library/bootstrap-4.6.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="Library/jquery-3.6.0.js"></script>
+    <script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
+    <link rel="icon" type="image/ico" href="images/botella.ico.ico" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Figtree', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Fraunces', serif;
+        }
+
+        .producto {
+            background: #111;
+            border: 1px solid #FFD700;
+            border-radius: 6px;
+            height: 100%;
+            transition: .3s;
+        }
+
+        .producto:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, .15);
+        }
+
+        .producto img {
+            height: 220px;
+            width: 100%;
+            object-fit: contain;
+            background: #fff;
+            padding: 10px;
+        }
+
+        .badge-categoria {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #222;
+            color: #FFD700;
+            font-size: .7rem;
+        }
+
+        .precio-producto {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        #buscadorCatalogo {
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background:#000;border-bottom:1px solid #222;">
+        <a class="navbar-brand" href="index.html">
+            <img src="images/licores79.png" alt="Licores 79" style="max-height:90px;">
+        </a>
+
+        <div class="ml-auto">
+            <a href="Carrito.html" style="color:#FFD700;font-size:1.3rem;">
+                <i class="fas fa-cart-shopping"></i>
+                <span class="badge-carrito" hidden>0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 style="color:#FFD700;">
+                    Más Vendidos
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Productos más comprados por nuestros clientes
+                </p>
+            </div>
+        </div>
+        <div class="mb-4">
+            <input type="text" id="buscadorCatalogo" class="form-control" placeholder="Buscar producto...">
+        </div>
+        <div class="row" id="contenedorCatalogo">
+        </div>
+    </div>
+    <footer style="background:#111;padding:30px 0;">
+        <div class="container text-center">
+            <p style="color:#666;">
+                © 2026 Licores La 79
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/carrito.js"></script>
+    <script>
+        document.addEventListener(
+            'DOMContentLoaded',
+            cargarCatalogo
+        );
+
+        let todosLosProductos = [];
+        async function cargarCatalogo() {
+            try {
+                const response =
+                    await fetch('/api/mas-vendidos');
+                todosLosProductos =
+                    await response.json();
+                pintarProductos(
+                    todosLosProductos
+                );
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function pintarProductos(productos) {
+            const contenedor =
+                document.getElementById(
+                    'contenedorCatalogo'
+                );
+            contenedor.innerHTML = '';
+            productos.forEach(producto => {
+                contenedor.innerHTML += `
+        <div class="col-lg-3 col-md-4 col-6 mb-4">
+            <div class="card producto">
+                <div class="position-relative">
+                    <a href="producto.html?sku=${producto.sku}">
+                        <img
+                            src="${producto.imagen}"
+                            alt="${producto.nombre}">
+                    </a>
+                    <span class="badge badge-categoria">
+  ${producto.categoria === 'Otros Licores' ||
+                        producto.categoria === 'Bebidas y Alimentos'
+                        ? producto.subcategoria
+                        : producto.categoria
+                    }
+</span>
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h6
+                        class="text-white"
+                        style="
+                           min-height:50px;
+                        ">
+                        ${producto.nombre}
+                    </h6>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <span class="precio-producto">
+                            $
+                            ${Number(
+                        producto.precio_cop
+                    ).toLocaleString('es-CO')}
+                        </span>
+                        <a
+                            href="#"
+                            data-add
+                            data-sku="${producto.sku}"
+                            data-nombre="${producto.nombre}"
+                            data-precio="${producto.precio_cop}"
+                            data-img="${producto.imagen}">
+                            <i
+                                class="fas fa-cart-plus"
+                                style="
+                                    color:#FFD700;
+                                    font-size:1.2rem;
+                                ">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+            });
+        }
+
+        document
+            .getElementById('buscadorCatalogo')
+            .addEventListener('input', function () {
+                const texto =
+                    this.value
+                        .toLowerCase()
+                        .trim();
+
+                const filtrados =
+                    todosLosProductos.filter(
+                        p =>
+                            p.nombre
+                                .toLowerCase()
+                                .includes(texto)
+                    );
+
+                pintarProductos(
+                    filtrados
+                );
+
+            });
+
+    </script>
+</body>
+
+</html>

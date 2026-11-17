@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Iniciar Sesión - Licores la 79</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Library/bootstrap-4.6.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="Library/jquery-3.6.0.js"></script>
+    <script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
+    <link rel="icon" type="image/ico" href="images/botella.ico.ico" />
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <style>
+        body {
+            background-color: #000;
+            min-height: 100vh;
+        }
+
+        .login-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            padding: 20px 15px;
+        }
+
+        .login-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 35px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .login-card h3 {
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .login-card h4 {
+            color: #ccc;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+
+        .login-card .form-control {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            color: #fff;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .login-card .form-control::placeholder {
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .login-card .form-control:focus {
+            background-color: #333;
+            border-color: #FFD700;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+            color: #fff;
+        }
+
+        .btn-entrar {
+            background-color: #FFD700;
+            color: #000;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        .btn-entrar:hover {
+            background-color: #e6c200;
+            color: #000;
+        }
+
+        .login-card .text-muted {
+            color: #888;
+        }
+
+        .login-card a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        .login-card a:hover {
+            color: #fff;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .form-control {
+            padding-right: 45px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+            z-index:5;
+        }
+
+        .toggle-password:hover {
+            color: #FFD700;
+        }
+
+        .password-hint {
+            color: #666;
+            font-size: 0.75rem;
+            text-align: left;
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+
+        .success-text {
+            color: #28a745 !important;
+            font-weight: 500;
+        }
+
+        .error-text {
+            color: #FFD700 !important;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR PRINCIPAL -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
+        <a class="navbar-brand" href="index.html" style="padding-left: 3rem;">
+            <img src="images/licores79.png" alt="Licores 79" style="max-height: 120px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+            <form class="form-inline ml-auto mr-5">
+                <input class="form-control form-control-sm mr-2" type="text" placeholder="Buscar Productos...">
+                <button class="btn btn-sm" style="background-color: #FFD700;" type="submit">
+                    <i class="fas fa-search" style="color: #000;"></i>
+                </button>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="FormTest.html" title="Ingresar">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Carrito.html" title="Carrito">
+                        <i class="fas fa-cart-shopping"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+   <!-- NAVBAR DE CATEGORÍAS -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark categorias-navbar">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categorias">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="categorias">
+
+        <ul class="navbar-nav mr-auto">
+
+            <!-- VINOS -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    Vinos
+                </a>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" data-subcategoria="Vino Tinto">
+                        Tinto
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Vino Blanco">
+                        Blanco
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Vino Rosado">
+                        Rosado
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Vino Espumoso">
+                        Espumoso
+                    </a>
+                </div>
+            </li>
+
+            <!-- WHISKY -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    Whisky
+                </a>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" data-subcategoria="Escocés">
+                        Escocés
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Single Malt">
+                        Single Malt
+                    </a>
+
+                    <a class="dropdown-item" href="#"data-subcategoria="Americano">
+                        Americano
+                    </a>
+                </div>
+            </li>
+
+            <!-- TEQUILA -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    Tequila
+                </a>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" data-subcategoria="Tequila Blanco">
+                        Blanco
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Tequila Reposado">
+                        Reposado
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Tequila Añejo">
+                        Añejo
+                    </a>
+                </div>
+            </li>
+
+            <!-- CERVEZA -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    Cervezas
+                </a>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" data-subcategoria="Nacional">
+                        Nacional
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Importada">
+                        Importada
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Artesanal">
+                        Artesanal
+                    </a>
+                </div>
+            </li>
+
+            <!-- OTROS LICORES -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    Otros Licores
+                </a>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" data-subcategoria="Aguardiente">
+                        Aguardiente
+                    </a>
+                    
+                    <a class="dropdown-item" href="#" data-subcategoria="Ron">
+                        Ron
+                    </a>
+                    
+                    <a class="dropdown-item" href="#" data-subcategoria="Vodka">
+                        Vodka
+                    </a>
+                    
+                    <a class="dropdown-item" href="#" data-subcategoria="Ginebra">
+                        Ginebra
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Cremas">
+                        Cremas
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Cognac">
+                        Cognac
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Brandy">
+                        Brandy
+                    </a>
+                </div>
+            </li>
+
+            <!-- BEBIDAS Y ALIMENTOS -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    Bebidas y Alimentos
+                </a>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" data-subcategoria="Snacks">
+                        Snacks
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Gaseosa">
+                        Gaseosa
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Energizante">
+                        Energizante
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Jugo">
+                        Jugo
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Agua">
+                        Agua
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-subcategoria="Hidratante">
+                        Hidratante
+                    </a>
+                </div>
+            </li>
+
+            <!-- OFERTAS -->
+            <li class="nav-item">
+                <a class="nav-link text-danger font-weight-bold" href="#">
+                    + OFERTAS +
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+    <!-- LOGIN -->
+    <div class="login-wrapper">
+        <div class="login-card">
+            <h3>BIENVENIDO</h3>
+            <h4>Iniciar sesión</h4>
+
+            <form data-api="login">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="EMAIL" name="email" id="loginEmail" autocomplete="email" required>
+                    <small id="loginEmailMsg" class="error-text"></small>
+                </div>
+                <div class="form-group">
+                    <div class="password-wrapper">
+                        <input type="password" class="form-control" placeholder="CONTRASEÑA" name="contrasena"
+                            minlength="8" id="passwordInput" autocomplete="current-password" required>
+                        <span class="toggle-password">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </span>
+                    </div>
+                    <small id="loginPassMsg" class="error-text"></small>
+                    
+                    <p class="password-hint">Mínimo 8 caracteres</p>
+                </div>
+
+                <button type="submit" class="btn btn-entrar">ENTRAR</button>
+
+                <br><br>
+
+                <a href="RecuperarContrasena.html" class="text-muted" style="font-size: 0.9rem;">¿Olvidaste la
+                    contraseña?</a>
+            </form>
+
+            <br>
+
+            <p class="text-muted mb-0" style="font-size: 0.9rem;">
+                ¿No tienes cuenta? <a href="NuevoCliente.html">Regístrate</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- LÍNEA SEPARADORA -->
+    <hr style="border: none; border-top: 1px solid #333; margin: 40px 0 0 0;">
+
+    <!-- FOOTER -->
+    <footer style="background-color: #111; color: #ccc; padding: 50px 0 0 0;">
+        <div class="container">
+            <div class="row">
+
+                <!-- Columna 1: Logo + Descripción + Redes -->
+                <div class="col-md-3 mb-4">
+                    <img src="images/licores79.png" alt="Licores 79" style="max-height: 70px; margin-bottom: 15px;">
+                    <p style="color: #999; font-size: 0.9rem;">La mejor selección de licores con entrega rápida en Cali.
+                    </p>
+                    <div class="d-flex">
+                        <a href="https://instagram.com/guille_licoresla79" target="_blank"
+                            style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" style="color: #FFD700; font-size: 1.3rem; margin-right: 15px;">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" target="_blank" style="color: #FFD700; font-size: 1.3rem;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Tienda -->
+                <div class="col-md-3 mb-4">
+                    <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">NUESTRA
+                        TIENDA</h5>
+                    <ul class="list-unstyled" style="font-size: 0.9rem;">
+                        <li class="mb-2"><a href="index.html" style="color: #999; text-decoration: none;">Inicio</a>
+                        </li>
+                        <li class="mb-2"><a href="#" style="color: #999; text-decoration: none;">Categorías</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Legal -->
+                <div class="col-md-3 mb-4">
+                    <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">LEGAL</h5>
+                    <ul class="list-unstyled" style="font-size: 0.9rem;">
+                        <li class="mb-2"><a href="PreguntasFrecuentes.html?v=1"
+                                style="color: #999; text-decoration: none;">Preguntas frecuentes</a></li>
+                        <li class="mb-2"><a href="TerminosCondiciones.html?v=1"
+                                style="color: #999; text-decoration: none;">Términos y condiciones</a></li>
+                        <li class="mb-2"><a href="PoliticaPrivacidad.html?v=1"
+                                style="color: #999; text-decoration: none;">Política de privacidad</a></li>
+                        <li class="mb-2"><a href="PoliticaDomicilios.html?v=1"
+                                style="color: #999; text-decoration: none;">Política de domicilios</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Sede -->
+                <div class="col-md-3 mb-4">
+                    <h5 style="color: #FFD700; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">SEDE</h5>
+                    <ul class="list-unstyled" style="font-size: 0.9rem; color: #999;">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt mr-2" style="color: #FFD700;"></i>
+                            Calle 79 # 3bn97 (Floralia), Cali
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock mr-2" style="color: #FFD700;"></i>
+                            Lun – Dom: 10:00 a.m. – 2:00 a.m.
+                        </li>
+                        <li class="mb-2">
+                            <i class="fab fa-whatsapp mr-2" style="color: #FFD700;"></i>
+                            <a href="https://wa.me/573186408080" style="color: #999; text-decoration: none;"
+                                target="_blank">318 640 8080</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <hr style="border: none; border-top: 1px solid #333;">
+            <p class="text-center mb-0" style="color: #666; font-size: 0.85rem; padding: 15px 0;">
+                © 2026 Licores La 79 — Todos los derechos reservados
+            </p>
+        </div>
+    </footer>
+
+    <!-- AVISO LEGAL -->
+    <footer class="text-center" style="background-color: #0a0a0a; padding: 12px 0;">
+        <p class="mb-0" style="color: #555; font-size: 0.75rem;">
+            El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Prohíbase el expendio de bebidas
+            embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994.
+        </p>
+    </footer>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('passwordInput');
+            const icon = document.getElementById('eyeIcon');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document
+                .querySelector('.toggle-password')
+                .addEventListener('click', togglePassword);
+        });
+
+        //EMAIL
+        const loginEmail =
+            document.getElementById('loginEmail');
+
+        const loginEmailMsg =
+            document.getElementById('loginEmailMsg');
+
+        loginEmail.addEventListener('input', function () {
+
+            this.value = this.value.toLowerCase();
+
+            const valor = this.value.trim();
+
+            this.classList.remove(
+                'input-error',
+                'input-success'
+            );
+
+            if (valor === '') {
+
+                loginEmailMsg.textContent = '';
+                return;
+            }
+
+            if (!valor.includes('@')) {
+
+                this.classList.add('input-error');
+
+                loginEmailMsg.className =
+                    'error-text';
+
+                loginEmailMsg.textContent =
+                    '⚠ Falta el símbolo @';
+
+                return;
+            }
+
+            const regex =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!regex.test(valor)) {
+
+                this.classList.add('input-error');
+
+                loginEmailMsg.className =
+                    'error-text';
+
+                loginEmailMsg.textContent =
+                    '⚠ Correo incompleto';
+
+                return;
+            }
+
+            this.classList.add('input-success');
+
+            loginEmailMsg.className =
+                'success-text';
+
+            loginEmailMsg.textContent =
+                '✓ Correo válido';
+
+        });
+
+        //PASSSWORD
+        const loginPassword =
+            document.getElementById('passwordInput');
+
+        const loginPassMsg =
+            document.getElementById('loginPassMsg');
+
+        loginPassword.addEventListener('input', function () {
+
+            this.classList.remove(
+                'input-error',
+                'input-success'
+            );
+
+            if (this.value.length === 0) {
+
+                loginPassMsg.textContent = '';
+                return;
+            }
+
+            if (this.value.length < 8) {
+
+                this.classList.add('input-error');
+
+                loginPassMsg.className =
+                    'error-text';
+
+                loginPassMsg.textContent =
+                    '⚠ Mínimo 8 caracteres';
+
+            } else {
+
+                this.classList.add('input-success');
+
+                loginPassMsg.className =
+                    'success-text';
+
+                loginPassMsg.textContent =
+                    '✓ Formato correcto';
+            }
+
+        });
+    </script>
+    <script src="js/auth.js"></script>
+    <script src="js/productos.js"></script>
+</body>
+
+</html>
