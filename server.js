@@ -494,48 +494,154 @@ app.post('/api/suscribir',
   });  
 
   app.get('/api/mas-vendidos', async (req, res, next) => {
+    try {
+  
+      const result = await pool.query(`
+        SELECT
+          p.sku,
+          p.nombre,
+          p.categoria,
+          s.nombre AS subcategoria,
+          p.precio_cop,
+          p.imagen,
+          p.stock,
+          SUM(pi.cantidad) AS total_vendido
+        FROM productos p
+        INNER JOIN pedido_items pi
+          ON p.id = pi.producto_id
+        LEFT JOIN subcategorias s
+          ON p.subcategoria_id = s.id
+        WHERE p.activo = true
+        GROUP BY
+          p.id,
+          p.sku,
+          p.nombre,
+          p.categoria,
+          s.nombre,
+          p.precio_cop,
+          p.imagen,
+          p.stock
+        ORDER BY total_vendido DESC
+        LIMIT 12
+      `);
+  
+      res.json(result.rows);
+  
+    } catch (e) {
+      next(e);
+    }
+  });
+
+  app.get('/api/mas-vendidos/todos', async (req, res, next) => {
+    try {
+  
+      const result = await pool.query(`
+        SELECT
+          p.sku,
+          p.nombre,
+          p.categoria,
+          s.nombre AS subcategoria,
+          p.precio_cop,
+          p.imagen,
+          p.stock,
+          SUM(pi.cantidad) AS total_vendido
+        FROM productos p
+        INNER JOIN pedido_items pi
+          ON p.id = pi.producto_id
+        LEFT JOIN subcategorias s
+          ON p.subcategoria_id = s.id
+        WHERE p.activo = true
+        GROUP BY
+          p.id,
+          p.sku,
+          p.nombre,
+          p.categoria,
+          s.nombre,
+          p.precio_cop,
+          p.imagen,
+          p.stock
+        ORDER BY total_vendido DESC
+      `);
+  
+      res.json(result.rows);
+  
+    } catch (e) {
+      next(e);
+    }
+  });
+
+  app.get('/api/admin/pedidos', async (req, res, next) => {
+    try {
+  
+      const result = await pool.query(`
+        SELECT
+          p.id,
+          u.nombre_completo,
+          u.email,
+          u.telefono,
+          p.total_cop,
+          p.estado,
+          p.direccion,
+          p.metodo_pago,
+          p.creado_en
+        FROM pedidos p
+        INNER JOIN usuarios u
+          ON p.usuario_id = u.id
+        ORDER BY p.creado_en DESC
+      `);
+  
+      res.json(result.rows);
+  
+    } catch (e) {
+      next(e);
+    }
+  });
+
+  app.get('/api/admin/pedidos/:id', async (req, res, next) => {
+    try {
+  
+      const { id } = req.params;
+  
+      const result = await pool.query(`
+        SELECT
+          p.id,
+          pr.nombre,
+          pi.cantidad,
+          pi.precio_unitario
+        FROM pedido_items pi
+        INNER JOIN productos pr
+          ON pr.id = pi.producto_id
+        INNER JOIN pedidos p
+          ON p.id = pi.pedido_id
+        WHERE p.id = $1
+      `, [id]);
+  
+      res.json(result.rows);
+  
+    } catch (e) {
+      next(e);
+    }
+  });
+
+  app.put('/api/admin/pedidos/:id/estado', async (req, res, next) => {
 
     try {
   
-      app.get('/api/mas-vendidos/todos', async (req, res, next) => {
-        try {
-      
-          const result = await pool.query(`
-            SELECT
-              p.sku,
-              p.nombre,
-              p.categoria,
-              s.nombre AS subcategoria,
-              p.precio_cop,
-              p.imagen,
-              p.stock,
-              SUM(pi.cantidad) AS total_vendido
-            FROM productos p
-            INNER JOIN pedido_items pi
-              ON p.id = pi.producto_id
-            LEFT JOIN subcategorias s
-              ON p.subcategoria_id = s.id
-            WHERE p.activo = true
-            GROUP BY
-              p.id,
-              p.sku,
-              p.nombre,
-              p.categoria,
-              s.nombre,
-              p.precio_cop,
-              p.imagen,
-              p.stock
-            ORDER BY total_vendido DESC
-          `);
-      
-          res.json(result.rows);
-      
-        } catch (e) {
-          next(e);
-        }
-      });
+      const { id } = req.params;
+      const { estado } = req.body;
   
-      res.json(result.rows);
+      await pool.query(
+        `
+        UPDATE pedidos
+        SET estado = $1
+        WHERE id = $2
+        `,
+        [estado, id]
+      );
+  
+      res.json({
+        success: true
+      });
   
     } catch (e) {
   
@@ -544,7 +650,6 @@ app.post('/api/suscribir',
     }
   
   });
-
 // ---------- Sitio estático y errores ----------
 app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'deny' }));
 app.get('/', (req, res) => {
