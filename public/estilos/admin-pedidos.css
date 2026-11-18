@@ -1,0 +1,241 @@
+body{
+    background:#0a0a0a;
+    color:#fff;
+    padding:30px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.titulo{
+    color:#FFD700;
+    font-weight:700;
+}
+
+.card-pedido{
+    background:#111;
+    border:1px solid #FFD700;
+    border-radius:14px;
+    padding:25px;
+    margin-bottom:25px;
+    transition:.25s;
+}
+
+.card-pedido:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(255,215,0,.12);
+}
+
+.titulo-pedido{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.dato{
+    margin-bottom:12px;
+}
+
+.estado{
+    background:#1a1a1a !important;
+    color:white !important;
+    border:1px solid #444 !important;
+}
+
+.btn-warning{
+    min-width:180px;
+    font-weight:600;
+}
+
+.badge{
+    font-size:.8rem;
+    padding:.6rem .9rem;
+}
+
+.modal-content{
+    background:#111;
+    border:1px solid #FFD700;
+    color:white;
+}
+
+.modal-header,
+.modal-footer{
+    border-color:#FFD700;
+}
+
+#toastExito{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:#198754;
+    color:white;
+    padding:15px 20px;
+    border-radius:10px;
+    display:none;
+    z-index:99999;
+    box-shadow:0 4px 20px rgba(0,0,0,.4);
+    font-weight:bold;
+}
+
+#toastError{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:#dc3545;
+    color:white;
+    padding:15px 20px;
+    border-radius:10px;
+    display:none;
+    z-index:99999;
+    box-shadow:0 4px 20px rgba(0,0,0,.4);
+    font-weight:bold;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 991px){
+
+    body{
+        padding:20px;
+    }
+
+    .card-pedido{
+        padding:20px;
+    }
+
+}
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media (max-width: 768px){
+
+    body{
+        padding:15px;
+    }
+
+    .titulo{
+        font-size:1.8rem;
+        text-align:center;
+    }
+
+    .titulo-pedido{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .card-pedido{
+        padding:18px;
+        border-radius:12px;
+    }
+
+    .dato{
+        font-size:.95rem;
+        line-height:1.5;
+        word-break:break-word;
+    }
+
+    .estado{
+        margin-bottom:15px;
+    }
+
+    .btn-warning{
+        width:100%;
+        min-width:100%;
+    }
+
+    .modal-dialog{
+        margin:10px;
+    }
+
+    #toastExito,
+    #toastError{
+        left:15px;
+        right:15px;
+        width:auto;
+        top:15px;
+        text-align:center;
+    }
+
+}
+
+/* =========================
+   MÓVIL PEQUEÑO
+========================= */
+
+@media (max-width: 480px){
+
+    body{
+        padding:10px;
+    }
+
+    .titulo{
+        font-size:1.5rem;
+    }
+
+    .card-pedido{
+        padding:15px;
+    }
+
+    .card-pedido h4{
+        font-size:1.3rem;
+    }
+
+    .dato{
+        font-size:.9rem;
+    }
+
+    .badge{
+        width:100%;
+        text-align:center;
+        font-size:.75rem;
+    }
+
+    select.estado{
+        font-size:.9rem;
+    }
+
+    .btn-warning{
+        font-size:.95rem;
+    }
+
+    .modal-title{
+        font-size:1.1rem;
+    }
+
+}
+
+/* =========================
+   MODO MÓVIL ULTRA PEQUEÑO
+========================= */
+
+@media (max-width: 360px){
+
+    .card-pedido{
+        padding:12px;
+    }
+
+    .dato{
+        font-size:.85rem;
+    }
+
+    .btn-warning{
+        font-size:.85rem;
+        padding:.5rem;
+    }
+
+}
+
+.btn-info{
+    background:#0dcaf0;
+    border:none;
+    color:#000;
+    font-weight:600;
+}
+
+.btn-info:hover{
+    background:#31d2f2;
+}

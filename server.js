@@ -624,7 +624,6 @@ app.post('/api/suscribir',
   });
 
   app.put('/api/admin/pedidos/:id/estado', async (req, res, next) => {
-
     try {
   
       const { id } = req.params;
@@ -645,10 +644,11 @@ app.post('/api/suscribir',
   
     } catch (e) {
   
+      console.error(e);
+  
       next(e);
   
     }
-  
   });
 // ---------- Sitio estático y errores ----------
 app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'deny' }));
