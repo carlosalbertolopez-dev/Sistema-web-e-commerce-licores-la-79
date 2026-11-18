@@ -3,8 +3,47 @@ let nuevoEstado = null;
 
 document.addEventListener(
     'DOMContentLoaded',
-    cargarPedidos
+    iniciarPanel
 );
+
+async function iniciarPanel() {
+
+    await validarAdmin();
+
+    cargarPedidos();
+
+}
+
+async function validarAdmin() {
+
+    try {
+
+        const response =
+            await fetch('/api/auth/me');
+
+        if (!response.ok) {
+
+            window.location.href = '/';
+            return;
+
+        }
+
+        const usuario =
+            await response.json();
+
+        if (usuario.rol !== 'admin') {
+
+            window.location.href = '/';
+
+        }
+
+    } catch (error) {
+
+        window.location.href = '/';
+
+    }
+
+}
 
 function obtenerColorEstado(estado) {
 

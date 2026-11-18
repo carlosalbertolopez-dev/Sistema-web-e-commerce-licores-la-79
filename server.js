@@ -86,11 +86,69 @@ const limiteAuth = rateLimit({ windowMs: 15 * 60_000, limit: 10, standardHeaders
 app.use('/api', limiteGeneral);
 
 // ---------- Sesión ----------
-const cookieOpts = { httpOnly: true, secure: prod, sameSite: 'strict', maxAge: 2 * 60 * 60 * 1000, path: '/' };
-const setSession = (res, u) => res.cookie('l79_session', jwt.sign({ sub: u.id, rol: u.rol, nombre: u.nombre_completo }, process.env.JWT_SECRET, { expiresIn: '2h', algorithm: 'HS256' }), cookieOpts);
+
+const cookieOpts = {
+  httpOnly: true,
+  secure: prod,
+  sameSite: 'strict',
+  maxAge: 2 * 60 * 60 * 1000,
+  path: '/'
+};
+
+const setSession = (res, u) =>
+  res.cookie(
+    'l79_session',
+    jwt.sign(
+      {
+        sub: u.id,
+        rol: u.rol,
+        nombre: u.nombre_completo
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '2h',
+        algorithm: 'HS256'
+      }
+    ),
+    cookieOpts
+  );
+
 function auth(req, res, next) {
-  try { req.user = jwt.verify(req.cookies.l79_session, process.env.JWT_SECRET, { algorithms: ['HS256'] }); next(); }
-  catch { res.status(401).json({ error: 'Inicia sesión para continuar.' }); }
+
+  try {
+
+    req.user = jwt.verify(
+      req.cookies.l79_session,
+      process.env.JWT_SECRET,
+      {
+        algorithms: ['HS256']
+      }
+    );
+
+    next();
+
+  } catch {
+
+    res.status(401).json({
+      error: 'Inicia sesión para continuar.'
+    });
+
+  }
+
+}
+
+function soloAdmin(req, res, next) {
+
+  if (req.user.rol !== 'admin') {
+
+    return res.status(403).json({
+      error: 'Acceso denegado'
+    });
+
+  }
+
+  next();
+
 }
 
 // ---------- Validación ----------
@@ -177,7 +235,15 @@ app.post('/api/auth/login', limiteAuth, validar(loginSch), async (req, res, next
 });
 
 app.post('/api/auth/logout', (req, res) => { res.clearCookie('l79_session', { ...cookieOpts, maxAge: undefined }); res.json({ ok: true }); });
-app.get('/api/auth/me', auth, (req, res) => res.json({ id: req.user.sub, nombre: req.user.nombre }));
+app.get('/api/auth/me', auth, (req, res) => {
+
+  res.json({
+    id: req.user.sub,
+    nombre: req.user.nombre,
+    rol: req.user.rol
+  });
+
+});
 app.get('/api/productos', async (req, res, next) => {
   try {
 
@@ -570,7 +636,9 @@ app.post('/api/suscribir',
     }
   });
 
-  app.get('/api/admin/pedidos', async (req, res, next) => {
+  app.get('/api/admin/pedidos',
+    auth,
+    soloAdmin, async (req, res, next) => {
     try {
   
       const result = await pool.query(`
@@ -597,7 +665,9 @@ app.post('/api/suscribir',
     }
   });
 
-  app.get('/api/admin/pedidos/:id', async (req, res, next) => {
+  app.get('/api/admin/pedidos/:id',
+    auth,
+    soloAdmin, async (req, res, next) => {
     try {
   
       const { id } = req.params;
@@ -623,7 +693,9 @@ app.post('/api/suscribir',
     }
   });
 
-  app.put('/api/admin/pedidos/:id/estado', async (req, res, next) => {
+  app.put('/api/admin/pedidos/:id/estado',
+    auth,
+    soloAdmin, async (req, res, next) => {
     try {
   
       const { id } = req.params;
