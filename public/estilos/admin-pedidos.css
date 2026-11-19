@@ -239,3 +239,119 @@ body{
 .btn-info:hover{
     background:#31d2f2;
 }
+
+.dashboard-grid{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    margin:25px 0 35px;
+
+}
+
+.dashboard-card{
+
+    flex:1;
+
+    min-width:280px;
+
+    background:linear-gradient(
+        145deg,
+        #111,
+        #1a1a1a
+    );
+
+    border:1px solid #FFD700;
+
+    border-radius:14px;
+
+    padding:25px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.3);
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 12px 25px rgba(255,215,0,.15);
+
+}
+
+.dashboard-card h3{
+
+    color:#FFD700;
+
+    font-size:1rem;
+
+    margin-bottom:15px;
+
+}
+
+.dashboard-card span{
+
+    color:white;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+.contenedor-busqueda{
+
+    margin:25px 0 30px;
+
+}
+
+.buscador-estados{
+
+    width:100%;
+
+    background:#111;
+
+    color:white;
+
+    border:2px solid #FFD700;
+
+    border-radius:14px;
+
+    padding:16px 20px;
+
+    font-size:1rem;
+
+    transition:.3s;
+
+}
+
+.buscador-estados::placeholder{
+
+    color:#888;
+
+}
+
+.buscador-estados:focus{
+
+    outline:none;
+
+    border-color:#FFD700;
+
+    box-shadow:
+        0 0 18px rgba(
+            255,
+            215,
+            0,
+            .25
+        );
+
+}

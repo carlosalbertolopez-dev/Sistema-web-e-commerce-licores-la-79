@@ -636,6 +636,102 @@ app.post('/api/suscribir',
     }
   });
 
+  app.get(
+    '/api/admin/dashboard',
+    auth,
+    soloAdmin,
+    async (req, res, next) => {
+  
+      try {
+  
+        const totalPedidos = await pool.query(`
+          SELECT COUNT(*) total
+          FROM pedidos
+        `);
+  
+        const pendientes = await pool.query(`
+          SELECT COUNT(*) total
+          FROM pedidos
+          WHERE estado = 'pendiente'
+        `);
+
+        const pagados = await pool.query(`
+          SELECT COUNT(*) total
+          FROM pedidos
+          WHERE estado='pagado'
+        `);
+
+        const preparando = await pool.query(`
+          SELECT COUNT(*) total
+          FROM pedidos
+          WHERE estado='preparando'
+        `);
+  
+        const enviados = await pool.query(`
+          SELECT COUNT(*) total
+          FROM pedidos
+          WHERE estado = 'enviado'
+        `);
+  
+        const entregados = await pool.query(`
+          SELECT COUNT(*) total
+          FROM pedidos
+          WHERE estado = 'entregado'
+        `);
+
+        const cancelados = await pool.query(`
+          SELECT COUNT(*) total
+          FROM pedidos
+          WHERE estado='cancelado'
+        `);
+  
+        const ventas = await pool.query(`
+          SELECT
+            COALESCE(
+              SUM(total_cop),
+              0
+            ) total
+          FROM pedidos
+          WHERE estado='entregado'
+        `);             
+             
+  
+        res.json({
+
+          pedidos:
+            totalPedidos.rows[0].total,
+        
+          pendientes:
+            pendientes.rows[0].total,
+        
+          pagados:
+            pagados.rows[0].total,
+        
+          preparando:
+            preparando.rows[0].total,
+        
+          enviados:
+            enviados.rows[0].total,
+        
+          entregados:
+            entregados.rows[0].total,
+        
+          cancelados:
+            cancelados.rows[0].total,
+        
+          ventas:
+            ventas.rows[0].total
+        
+        });
+      } catch (e) {
+  
+        next(e);
+  
+      }
+  
+    }
+  );
+
   app.get('/api/admin/pedidos',
     auth,
     soloAdmin, async (req, res, next) => {

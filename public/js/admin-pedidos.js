@@ -1,16 +1,152 @@
 let pedidoActualId = null;
 let nuevoEstado = null;
 
-document.addEventListener(
-    'DOMContentLoaded',
-    iniciarPanel
-);
+async function cargarDashboard(){
 
-async function iniciarPanel() {
+    try{
+
+        const response =
+            await fetch(
+                '/api/admin/dashboard'
+            );
+
+        const data =
+            await response.json();
+
+        document.getElementById(
+            'dashboardAdmin'
+        ).innerHTML = `
+
+            <div class="dashboard-card">
+
+                <h3>
+                    Total Pedidos
+                </h3>
+
+                <span>
+                    ${data.pedidos}
+                </span>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <h3>
+                    Pendientes
+                </h3>
+
+                <span>
+                    ${data.pendientes}
+                </span>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <h3>
+                    Enviados
+                </h3>
+
+                <span>
+                    ${data.enviados}
+                </span>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <h3>
+                    Entregados
+                </h3>
+
+                <span>
+                    ${data.entregados}
+                </span>
+
+            </div>
+
+            <div class="dashboard-card">
+
+    <h3>
+        Pagados
+    </h3>
+
+    <span>
+        ${data.pagados}
+    </span>
+
+</div>
+
+<div class="dashboard-card">
+
+    <h3>
+        Preparando
+    </h3>
+
+    <span>
+        ${data.preparando}
+    </span>
+
+</div>
+
+<div class="dashboard-card">
+
+    <h3>
+        Cancelados
+    </h3>
+
+    <span>
+        ${data.cancelados}
+    </span>
+
+</div>
+
+            <div class="dashboard-card">
+
+                <h3>
+                    Ventas COP
+                </h3>
+
+                <span>
+
+                    $${Number(
+                        data.ventas
+                    ).toLocaleString(
+                        'es-CO'
+                    )}
+
+                </span>
+
+            </div>
+
+        `;
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    iniciarPanel();
+
+    const filtro = document.getElementById('filtroEstado');
+
+    if (filtro) {
+        filtro.addEventListener('input', filtrarPedidos);
+    }
+});
+
+
+async function iniciarPanel(){
 
     await validarAdmin();
 
-    cargarPedidos();
+    await cargarDashboard();
+
+    await cargarPedidos();
 
 }
 
@@ -107,7 +243,12 @@ async function cargarPedidos() {
 
             contenedor.innerHTML += `
 
-                <div class="card-pedido">
+                <div
+    class="card-pedido"
+    data-id="${pedido.id}"
+    data-cliente="${pedido.nombre_completo}"
+    data-email="${pedido.email}"
+    data-estado="${pedido.estado}">
 
                     <div class="titulo-pedido">
 
@@ -246,7 +387,31 @@ async function cargarPedidos() {
         console.error(error);
 
     }
+   
+}
 
+function filtrarPedidos() {
+    const texto = document
+        .getElementById('filtroEstado')
+        .value
+        .trim()
+        .toLowerCase();
+
+    document.querySelectorAll('.card-pedido').forEach(card => {
+
+        const id = card.dataset.id?.toLowerCase() || '';
+        const cliente = card.dataset.cliente?.toLowerCase() || '';
+        const email = card.dataset.email?.toLowerCase() || '';
+        const estado = card.dataset.estado?.toLowerCase() || '';
+
+        const coincide =
+            id.includes(texto) ||
+            cliente.includes(texto) ||
+            email.includes(texto) ||
+            estado.includes(texto);
+
+        card.style.display = coincide ? 'block' : 'none';
+    });
 }
 
 function registrarEventos() {
@@ -456,7 +621,9 @@ document
 
                 }, 3000);
 
-                cargarPedidos();
+                await cargarDashboard();
+
+await cargarPedidos();
 
             } catch (error) {
 
