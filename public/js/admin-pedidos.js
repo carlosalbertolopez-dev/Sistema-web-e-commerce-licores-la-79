@@ -433,6 +433,19 @@ function filtrarPedidos() {
     });
 }
 
+function mostrarToast(idToast) {
+
+    const toast =
+        document.getElementById(idToast);
+
+    toast.classList.add('mostrar');
+
+    setTimeout(() => {
+        toast.classList.remove('mostrar');
+    }, 3000);
+
+}
+
 function registrarEventos() {
 
     document
@@ -617,49 +630,29 @@ document
                     );
 
                 if (!response.ok) {
-
                     throw new Error();
-
                 }
 
                 $('#modalEstado')
                     .modal('hide');
 
-                const toast =
-                    document.getElementById(
-                        'toastExito'
-                    );
-
-                toast.style.display =
-                    'block';
-
-                setTimeout(() => {
-
-                    toast.style.display =
-                        'none';
-
-                }, 3000);
+                document.activeElement.blur();
 
                 await cargarDashboard();
 
-await cargarPedidos();
+                await cargarPedidos();
+
+                actualizarHoraPanel();
+
+                mostrarToast('toastExito');
 
             } catch (error) {
 
-                const toast =
-                    document.getElementById(
-                        'toastError'
-                    );
+                console.error(error);
 
-                toast.style.display =
-                    'block';
+                document.activeElement.blur();
 
-                setTimeout(() => {
-
-                    toast.style.display =
-                        'none';
-
-                }, 3000);
+                mostrarToast('toastError');
 
             }
 
@@ -696,3 +689,17 @@ await cargarPedidos();
         boton.textContent =
             '↻ Actualizar';
     }
+
+    $('#modalEstado').on(
+        'hidden.bs.modal',
+        function () {
+            document.activeElement.blur();
+        }
+    );
+    
+    $('#modalDetallePedido').on(
+        'hidden.bs.modal',
+        function () {
+            document.activeElement.blur();
+        }
+    );
