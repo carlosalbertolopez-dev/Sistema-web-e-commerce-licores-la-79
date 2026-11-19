@@ -130,13 +130,30 @@ async function cargarDashboard(){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+
     iniciarPanel();
 
-    const filtro = document.getElementById('filtroEstado');
+    const filtro =
+        document.getElementById(
+            'filtroEstado'
+        );
 
     if (filtro) {
-        filtro.addEventListener('input', filtrarPedidos);
+        filtro.addEventListener(
+            'input',
+            filtrarPedidos
+        );
     }
+
+    document
+        .getElementById(
+            'btnActualizar'
+        )
+        ?.addEventListener(
+            'click',
+            actualizarPanel
+        );
+
 });
 
 
@@ -147,6 +164,8 @@ async function iniciarPanel(){
     await cargarDashboard();
 
     await cargarPedidos();
+
+    actualizarHoraPanel();
 
 }
 
@@ -646,3 +665,34 @@ await cargarPedidos();
 
         }
     );
+
+    function actualizarHoraPanel() {
+
+        const ahora = new Date();
+    
+        document.getElementById(
+            'ultimaActualizacion'
+        ).textContent =
+            ahora.toLocaleString('es-CO');
+    }
+
+    async function actualizarPanel() {
+
+        const boton =
+            document.getElementById(
+                'btnActualizar'
+            );
+    
+        boton.disabled = true;
+        boton.textContent =
+            'Actualizando...';
+    
+        await cargarDashboard();
+        await cargarPedidos();
+    
+        actualizarHoraPanel();
+    
+        boton.disabled = false;
+        boton.textContent =
+            '↻ Actualizar';
+    }

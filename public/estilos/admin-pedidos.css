@@ -355,3 +355,37 @@ body{
         );
 
 }
+
+.panel-actualizacion{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin:15px 0 25px;
+    flex-wrap:wrap;
+}
+
+.ultima-actualizacion{
+    color:#bdbdbd;
+    font-size:14px;
+}
+
+#ultimaActualizacion{
+    color:#FFD700;
+    font-weight:600;
+}
+
+.btn-actualizar-panel{
+    background:#FFD700;
+    color:#000;
+    border:none;
+    border-radius:8px;
+    padding:8px 15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-actualizar-panel:hover{
+    background:#ffea70;
+}
