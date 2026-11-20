@@ -818,6 +818,91 @@ app.post('/api/suscribir',
   
     }
   });
+
+  app.get(
+    '/api/admin/ventas-dia',
+    async (req, res, next) => {
+
+        try {
+
+            const result =
+                await pool.query(`
+                    SELECT
+                        DATE(creado_en) AS fecha,
+                        SUM(total_cop) AS total
+                    FROM pedidos
+                    WHERE estado <> 'cancelado'
+                    GROUP BY DATE(creado_en)
+                    ORDER BY fecha
+                `);
+
+            res.json(result.rows);
+
+        } catch (error) {
+
+            next(error);
+
+        }
+
+    }
+);
+
+app.get(
+  '/api/admin/ventas-semana',
+  async (req, res, next) => {
+
+      try {
+
+          const result =
+              await pool.query(`
+                  SELECT
+                      DATE_TRUNC('week', creado_en) AS semana,
+                      SUM(total_cop) AS total
+                  FROM pedidos
+                  WHERE estado <> 'cancelado'
+                  GROUP BY semana
+                  ORDER BY semana
+              `);
+
+          res.json(result.rows);
+
+      } catch (error) {
+
+          next(error);
+
+      }
+
+  }
+);
+
+app.get(
+  '/api/admin/ventas-mes',
+  async (req, res, next) => {
+
+      try {
+
+          const result =
+              await pool.query(`
+                  SELECT
+                      DATE_TRUNC('month', creado_en) AS mes,
+                      SUM(total_cop) AS total
+                  FROM pedidos
+                  WHERE estado <> 'cancelado'
+                  GROUP BY mes
+                  ORDER BY mes
+              `);
+
+          res.json(result.rows);
+
+      } catch (error) {
+
+          next(error);
+
+      }
+
+  }
+);
+
 // ---------- Sitio estático y errores ----------
 app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'deny' }));
 app.get('/', (req, res) => {

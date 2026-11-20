@@ -402,3 +402,25 @@ body{
 .btn-actualizar-panel:hover{
     background:#ffea70;
 }
+
+.grafica-card{
+    background:#111;
+    border:1px solid #FFD700;
+    border-radius:14px;
+    padding:25px;
+    margin-bottom:30px;
+    height:420px;
+}
+
+.grafica-card h3{
+    color:#FFD700;
+    margin-bottom:20px;
+}
+
+.grafica-card canvas{
+    max-height:320px !important;
+}
+
+#graficaVentasDia{
+    max-height:400px;
+}
