@@ -424,3 +424,72 @@ body{
 #graficaVentasDia{
     max-height:400px;
 }
+
+.top-productos-card{
+    background:#111;
+    border:1px solid #FFD700;
+    border-radius:14px;
+    padding:25px;
+    margin-bottom:30px;
+}
+
+.top-productos-card h3{
+    color:#FFD700;
+    margin-bottom:20px;
+}
+
+.producto-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #2a2a2a;
+}
+
+.producto-top:last-child{
+    border-bottom:none;
+}
+
+.posicion{
+    color:#FFD700;
+    font-weight:700;
+}
+
+.cantidad-vendida{
+    color:#0dcaf0;
+    font-weight:700;
+}
+
+.stock-bajo-card{
+    background:#111;
+    border:1px solid #dc3545;
+    border-radius:14px;
+    padding:25px;
+    margin-bottom:30px;
+}
+
+.stock-bajo-card h3{
+    color:#dc3545;
+    margin-bottom:20px;
+}
+
+.stock-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 0;
+
+    border-bottom:1px solid #2a2a2a;
+}
+
+.stock-item:last-child{
+    border-bottom:none;
+}
+
+.stock-numero{
+    color:#dc3545;
+    font-weight:bold;
+}

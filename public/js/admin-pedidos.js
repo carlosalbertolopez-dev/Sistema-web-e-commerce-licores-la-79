@@ -163,16 +163,13 @@ document.addEventListener('DOMContentLoaded', () => {
 async function iniciarPanel(){
 
     await validarAdmin();
-
     await cargarDashboard();
-
     await cargarPedidos();
-
     await cargarGraficaVentasDia();
-
     await cargarGraficaVentasSemana();
-
     await cargarGraficaVentasMes();
+    await cargarStockBajo();
+    await cargarTopProductos();
 
     actualizarHoraPanel();
 
@@ -694,6 +691,8 @@ document
         await cargarGraficaVentasDia();
         await cargarGraficaVentasSemana();
         await cargarGraficaVentasMes();
+        await cargarTopProductos();
+        await cargarStockBajo();
     
         actualizarHoraPanel();
     
@@ -1105,3 +1104,121 @@ const datos =
         }
     
     }
+
+    async function cargarTopProductos() {
+
+        try {
+    
+            const response =
+                await fetch(
+                    '/api/admin/top-productos'
+                );
+    
+            if (!response.ok) {
+                throw new Error(
+                    'Error cargando top productos'
+                );
+            }
+    
+            const productos =
+                await response.json();
+    
+            const contenedor =
+                document.getElementById(
+                    'topProductos'
+                );
+    
+            contenedor.innerHTML = '';
+    
+            productos.forEach(
+                (producto, index) => {
+    
+                    contenedor.innerHTML += `
+                        <div class="producto-top">
+                            <span>
+                                <span class="posicion">
+                                    #${index + 1}
+                                </span>
+                                ${producto.nombre}
+                            </span>
+    
+                            <span class="cantidad-vendida">
+                                ${producto.vendidos}
+                                ventas
+                            </span>
+                        </div>
+                    `;
+    
+                }
+            );
+    
+        } catch(error){
+    
+            console.error(error);
+    
+        }
+    
+    }
+
+    async function cargarStockBajo() {
+
+        try {
+    
+            const response =
+                await fetch(
+                    '/api/admin/stock-bajo'
+                );
+    
+            if (!response.ok) {
+                throw new Error(
+                    'No se pudo cargar stock bajo'
+                );
+            }
+    
+            const productos =
+                await response.json();
+    
+            const contenedor =
+                document.getElementById(
+                    'stockBajo'
+                );
+    
+            contenedor.innerHTML = '';
+    
+            if (!productos.length) {
+    
+                contenedor.innerHTML = `
+                    <div class="text-success">
+                         No hay productos con stock bajo
+                    </div>
+                `;
+    
+                return;
+            }
+    
+            productos.forEach(producto => {
+    
+                contenedor.innerHTML += `
+                    <div class="stock-item">
+    
+                        <span>
+                            ${producto.nombre}
+                        </span>
+    
+                        <span class="stock-numero">
+                            Stock: ${producto.stock}
+                        </span>
+    
+                    </div>
+                `;
+    
+            });
+    
+        } catch (error) {
+    
+            console.error(error);
+    
+        }
+    
+    }
+    

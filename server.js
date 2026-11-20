@@ -903,6 +903,65 @@ app.get(
   }
 );
 
+app.get(
+  '/api/admin/top-productos',
+  async (req, res, next) => {
+
+      try {
+
+          const result =
+              await pool.query(`
+                  SELECT
+                      p.nombre,
+                      SUM(pi.cantidad) AS vendidos
+                  FROM pedido_items pi
+                  INNER JOIN productos p
+                      ON p.id = pi.producto_id
+                  GROUP BY p.id, p.nombre
+                  ORDER BY vendidos DESC
+                  LIMIT 5
+              `);
+
+          res.json(result.rows);
+
+      } catch (error) {
+
+          next(error);
+
+      }
+
+  }
+);
+
+app.get(
+  '/api/admin/stock-bajo',
+  async (req, res, next) => {
+
+      try {
+
+          const result =
+              await pool.query(`
+                  SELECT
+                      id,
+                      nombre,
+                      stock
+                  FROM productos
+                  WHERE stock <= 5
+                  AND activo = true
+                  ORDER BY stock ASC
+              `);
+
+          res.json(result.rows);
+
+      } catch (error) {
+
+          next(error);
+
+      }
+
+  }
+);
+
 // ---------- Sitio estático y errores ----------
 app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'deny' }));
 app.get('/', (req, res) => {
