@@ -12,51 +12,93 @@
 
 <body>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="admin-layout">
 
-        <div>
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                🍾 Licores La 79
+            </div>
 
-            <h2 class="titulo mb-1">
-                Gestión de Pedidos
-            </h2>
+            <nav>
 
-            <div class="grafica-card">
-
-                <h3> Ventas por día</h3>
+                <a href="admin-dashboard.html" class="menu-item">
+                    📊 Dashboard
+                </a>
             
-                <canvas id="graficaVentasDia"></canvas>
+                <a href="admin-pedidos.html" class="menu-item activo">
+                    📦 Pedidos
+                </a>
             
+                <a href="admin-productos.html" class="menu-item">
+                    🍾 Productos
+                </a>
+            
+                <a href="admin-categorias.html" class="menu-item">
+                    📂 Categorías
+                </a>
+            
+                <a href="admin-clientes.html" class="menu-item">
+                    👥 Clientes
+                </a>
+            
+                <a href="admin-reportes.html" class="menu-item">
+                    📈 Reportes
+                </a>
+            
+            </nav>
+        </aside>
+
+        <main class="contenido-admin">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h2 class="titulo mb-1">
+                        Gestión de Pedidos
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Administra los pedidos realizados en Licores La 79
+                    </p>
+
+                </div>
+
             </div>
 
             <div class="grafica-card">
-                <h3> Ventas por semana</h3>
+                <h3>📈 Ventas por día</h3>
+                <canvas id="graficaVentasDia"></canvas>
+            </div>
+
+            <div class="grafica-card">
+                <h3>📊 Ventas por semana</h3>
                 <canvas id="graficaVentasSemana"></canvas>
             </div>
-            
-            <div class="grafica-card">
 
-                <h3> Ventas por mes</h3>
-            
+            <div class="grafica-card">
+                <h3>📅 Ventas por mes</h3>
                 <canvas id="graficaVentasMes"></canvas>
-            
             </div>
 
             <div class="top-productos-card">
 
-                <h3> Top 5 Productos Más Vendidos</h3>
-            
+                <h3>
+                    🏆 Top 5 Productos Más Vendidos
+                </h3>
+
                 <div id="topProductos"></div>
-            
+
             </div>
 
             <div class="stock-bajo-card">
 
                 <h3>
-                     Productos con Stock Bajo
+                    ⚠ Productos con Stock Bajo
                 </h3>
-            
+
                 <div id="stockBajo"></div>
-            
+
             </div>
 
             <div class="panel-actualizacion">
@@ -67,194 +109,211 @@
                         --
                     </span>
                 </div>
-            
+
                 <button
                     id="btnActualizar"
                     class="btn-actualizar-panel">
                     ↻ Actualizar
                 </button>
-            
+
             </div>
 
             <div
-    class="dashboard-grid"
-    id="dashboardAdmin">
+                class="dashboard-grid"
+                id="dashboardAdmin">
+            </div>
 
-</div>
+            <div class="mb-4">
 
-            <p class="text-muted mb-0">
-                Administra los pedidos realizados en Licores La 79
-            </p>
+                <div class="contenedor-busqueda">
 
-        </div>
-
-    </div>
-
-    <div class="mb-4">
-
-        <div class="contenedor-busqueda">
-            <input
-                type="text"
-                id="filtroEstado"
-                class="buscador-estados"
-                placeholder="Buscar por N° pedido, cliente, correo o estado">
-        </div>
-    
-
-    <div id="contenedorPedidos">
-
-        <div class="text-center">
-            Cargando pedidos...
-        </div>
-
-    </div>
-
-    <div
-    id="toastExito"
-    class="toast-admin toast-exito">
-     Estado actualizado correctamente
-</div>
-
-<div
-    id="toastError"
-    class="toast-admin toast-error">
-     No fue posible actualizar el estado
-</div>
-
-    <div
-        class="modal fade"
-        id="modalEstado"
-        tabindex="-1">
-
-        <div
-            class="modal-dialog modal-dialog-centered">
-
-            <div class="modal-content">
-
-                <div class="modal-header">
-
-                    <h5 class="modal-title text-warning">
-                        Confirmar Cambio
-                    </h5>
-
-                    <button
-                        type="button"
-                        class="close text-white"
-                        data-dismiss="modal">
-
-                        <span>&times;</span>
-
-                    </button>
+                    <input
+                        type="text"
+                        id="filtroEstado"
+                        class="buscador-estados"
+                        placeholder="Buscar por N° pedido, cliente, correo o estado">
 
                 </div>
 
-                <div class="modal-body">
+                <div id="contenedorPedidos">
 
-                    <p id="textoConfirmacion"></p>
-
-                </div>
-
-                <div class="modal-footer">
-
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal">
-
-                        Cancelar
-
-                    </button>
-
-                    <button
-                        type="button"
-                        class="btn btn-warning"
-                        id="btnConfirmarEstado">
-
-                        Confirmar
-
-                    </button>
+                    <div class="text-center">
+                        Cargando pedidos...
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </main>
+
+    </div>
+
+    <!-- TOASTS -->
+
+    <div
+        id="toastExito"
+        class="toast-admin toast-exito">
+
+        ✅ Estado actualizado correctamente
 
     </div>
 
     <div
+        id="toastError"
+        class="toast-admin toast-error">
+
+        ❌ No fue posible actualizar el estado
+
+    </div>
+
+<!-- MODALES -->
+ <!-- MODAL CAMBIO DE ESTADO -->
+
+<div
+     class="modal fade" id="modalEstado" tabindex="-1">
+
+ <div
+    class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h5 class="modal-title text-warning">
+                Confirmar Cambio
+            </h5>
+
+            <button
+                type="button"
+                class="close text-white"
+                data-dismiss="modal">
+
+                <span>&times;</span>
+
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <p id="textoConfirmacion"></p>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal">
+
+                Cancelar
+
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-warning"
+                id="btnConfirmarEstado">
+
+                Confirmar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- MODAL DETALLE DEL PEDIDO -->
+
+<div
     class="modal fade"
     id="modalDetallePedido"
     tabindex="-1">
 
-    <div
-        class="modal-dialog modal-lg modal-dialog-centered">
+<div
+    class="modal-dialog modal-lg modal-dialog-centered">
 
-        <div class="modal-content">
+    <div class="modal-content">
 
-            <div class="modal-header">
+        <div class="modal-header">
 
-                <h5
-                    class="modal-title text-warning">
+            <h5
+                class="modal-title text-warning">
 
-                    Detalle del Pedido
+                Detalle del Pedido
 
-                </h5>
+            </h5>
 
-                <button
-                    type="button"
-                    class="close text-white"
-                    data-dismiss="modal">
+            <button
+                type="button"
+                class="close text-white"
+                data-dismiss="modal">
 
-                    <span>&times;</span>
+                <span>&times;</span>
 
-                </button>
+            </button>
 
-            </div>
+        </div>
 
-            <div class="modal-body">
+        <div class="modal-body">
 
-                <div class="table-responsive">
+            <div class="table-responsive">
 
-                    <table
-                        class="table table-dark">
+                <table
+                    class="table table-dark">
 
-                        <thead>
+                    <thead>
 
-                            <tr>
+                        <tr>
 
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th>Subtotal</th>
+                            <th>
+                                Producto
+                            </th>
 
-                            </tr>
+                            <th>
+                                Cantidad
+                            </th>
 
-                        </thead>
+                            <th>
+                                Precio
+                            </th>
 
-                        <tbody
-                            id="detallePedidoBody">
+                            <th>
+                                Subtotal
+                            </th>
 
-                        </tbody>
+                        </tr>
 
-                    </table>
+                    </thead>
 
-                </div>
+                    <tbody
+                        id="detallePedidoBody">
 
-                <hr>
+                    </tbody>
 
-                <h4
-                    class="text-warning text-right">
-
-                    Total:
-                    <span
-                        id="totalPedidoDetalle">
-
-                    </span>
-
-                </h4>
+                </table>
 
             </div>
+
+            <hr>
+
+            <h4
+                class="text-warning text-right">
+
+                Total:
+
+                <span
+                    id="totalPedidoDetalle">
+
+                </span>
+
+            </h4>
 
         </div>
 
@@ -262,11 +321,12 @@
 
 </div>
 
+</div>   
+
     <script src="Library/jquery-3.6.0.js"></script>
     <script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
-    <script src="js/admin-pedidos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/admin-pedidos.js"></script>
     
 </body>
-
 </html>

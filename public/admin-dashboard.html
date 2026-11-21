@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrativo</title>
+
+    <link
+        href="Library/bootstrap-4.6.0-dist/css/bootstrap.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="estilos/admin-pedidos.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            🍾 Licores La 79
+        </div>
+
+        <nav>
+
+            <a
+                href="admin-dashboard.html"
+                class="menu-item activo">
+
+                📊 Dashboard
+
+            </a>
+
+            <a
+                href="admin-pedidos.html"
+                class="menu-item">
+
+                📦 Pedidos
+
+            </a>
+
+            <a
+                href="#"
+                class="menu-item">
+
+                🍾 Productos
+
+            </a>
+
+            <a
+                href="#"
+                class="menu-item">
+
+                📂 Categorías
+
+            </a>
+
+            <a
+                href="#"
+                class="menu-item">
+
+                👥 Clientes
+
+            </a>
+
+            <a
+                href="#"
+                class="menu-item">
+
+                📈 Reportes
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <main class="contenido-admin">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h2 class="titulo mb-1">
+                    Dashboard Administrativo
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Resumen general de la tienda
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="panel-actualizacion">
+
+            <div class="ultima-actualizacion">
+
+                Última actualización:
+
+                <span id="ultimaActualizacion">
+                    --
+                </span>
+
+            </div>
+
+            <button
+                id="btnActualizar"
+                class="btn-actualizar-panel">
+
+                ↻ Actualizar
+
+            </button>
+
+        </div>
+
+        <div
+            class="dashboard-grid"
+            id="dashboardAdmin">
+        </div>
+
+        <div class="grafica-card">
+
+            <h3>
+                📈 Ventas por día
+            </h3>
+
+            <canvas id="graficaVentasDia"></canvas>
+
+        </div>
+
+        <div class="grafica-card">
+
+            <h3>
+                📊 Ventas por semana
+            </h3>
+
+            <canvas id="graficaVentasSemana"></canvas>
+
+        </div>
+
+        <div class="grafica-card">
+
+            <h3>
+                📅 Ventas por mes
+            </h3>
+
+            <canvas id="graficaVentasMes"></canvas>
+
+        </div>
+
+        <div class="top-productos-card">
+
+            <h3>
+                🏆 Top 5 Productos Más Vendidos
+            </h3>
+
+            <div id="topProductos"></div>
+
+        </div>
+
+        <div class="stock-bajo-card">
+
+            <h3>
+                ⚠ Productos con Stock Bajo
+            </h3>
+
+            <div id="stockBajo"></div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="Library/jquery-3.6.0.js"></script>
+
+<script src="Library/bootstrap-4.6.0-dist/js/bootstrap.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="js/admin-dashboard.js"></script>
+
+</body>
+</html>
