@@ -135,6 +135,16 @@
             }
         }
 
+        function escaparHTML(texto) {
+
+const div = document.createElement('div');
+
+div.textContent = texto ?? '';
+
+return div.innerHTML;
+
+}
+
         function pintarProductos(productos) {
             const contenedor =
                 document.getElementById(
@@ -146,17 +156,17 @@
         <div class="col-lg-3 col-md-4 col-6 mb-4">
             <div class="card producto">
                 <div class="position-relative">
-                    <a href="producto.html?sku=${producto.sku}">
+                    <a href="producto.html?sku=${encodeURIComponent(producto.sku)}">
                         <img
                             src="${producto.imagen}"
-                            alt="${producto.nombre}">
+                            alt="${escaparHTML(producto.nombre)}">
                     </a>
                     <span class="badge badge-categoria">
   ${producto.categoria === 'Otros Licores' ||
-                        producto.categoria === 'Bebidas y Alimentos'
-                        ? producto.subcategoria
-                        : producto.categoria
-                    }
+    producto.categoria === 'Bebidas y Alimentos'
+    ? escaparHTML(producto.subcategoria)
+    : escaparHTML(producto.categoria)
+}
 </span>
                 </div>
                 <div class="card-body d-flex flex-column">
@@ -165,7 +175,7 @@
                         style="
                            min-height:50px;
                         ">
-                        ${producto.nombre}
+                        ${escaparHTML(producto.nombre)}
                     </h6>
                     <div class="mt-auto d-flex justify-content-between align-items-center">
                         <span class="precio-producto">
@@ -177,8 +187,8 @@
                         <a
                             href="#"
                             data-add
-                            data-sku="${producto.sku}"
-                            data-nombre="${producto.nombre}"
+                            data-sku="${escaparHTML(producto.sku)}"
+                            data-nombre="${escaparHTML(producto.nombre)}"
                             data-precio="${producto.precio_cop}"
                             data-img="${producto.imagen}">
                             <i

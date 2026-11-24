@@ -136,6 +136,16 @@ async function cargarProductos() {
 
 }
 
+function escaparHTML(texto) {
+
+    const div = document.createElement('div');
+
+    div.textContent = texto ?? '';
+
+    return div.innerHTML;
+
+}
+
 async function filtrarSubcategoria(subcategoria) {
 
     try {
@@ -168,11 +178,11 @@ async function filtrarSubcategoria(subcategoria) {
 
                         <div class="position-relative">
 
-                            <a href="producto.html?sku=${producto.sku}">
+                            <a href="producto.html?sku=${encodeURIComponent(producto.sku)}">
                                 <img
                                     src="${producto.imagen}"
                                     class="card-img-top"
-                                    alt="${producto.nombre}"
+                                    alt="${escaparHTML(producto.nombre)}"
                                     style="
                                         height:220px;
                                         width:100%;
@@ -193,10 +203,10 @@ async function filtrarSubcategoria(subcategoria) {
                                 ">
 
                                 ${producto.categoria === 'Otros Licores' ||
-                    producto.categoria === 'Bebidas y Alimentos'
-                    ? producto.subcategoria
-                    : producto.categoria
-                }
+                                    producto.categoria === 'Bebidas y Alimentos'
+                                    ? escaparHTML(producto.subcategoria)
+                                    : escaparHTML(producto.categoria)
+                                }
 
                             </span>
 
@@ -211,7 +221,7 @@ async function filtrarSubcategoria(subcategoria) {
                                     font-size:.95rem;
                                     line-height:1.3;
                                 ">
-                                ${producto.nombre}
+                                ${escaparHTML(producto.nombre)}
                             </h6>
 
                             <div
@@ -229,7 +239,7 @@ async function filtrarSubcategoria(subcategoria) {
                                 <a
                                     href="#"
                                     data-add
-                                    data-sku="${producto.sku}"
+                                    data-sku="${escaparHTML(producto.sku)}"
                                     data-nombre="${producto.nombre}"
                                     data-precio="${producto.precio_cop}"
                                     data-img="${producto.imagen}"

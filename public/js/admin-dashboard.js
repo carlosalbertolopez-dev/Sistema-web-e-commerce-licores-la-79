@@ -148,7 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function iniciarPanel(){
 
-    await validarAdmin();
+    const esAdmin =
+        await validarAdmin();
+
+    if (!esAdmin) {
+        return;
+    }
     await cargarDashboard();    
     await cargarGraficaVentasDia();
     await cargarGraficaVentasSemana();
@@ -614,6 +619,17 @@ const datos =
         }
     
     }
+    
+
+    function escaparHTML(texto) {
+
+        const div = document.createElement('div');
+    
+        div.textContent = texto ?? '';
+    
+        return div.innerHTML;
+    
+    }
 
     async function cargarTopProductos() {
 
@@ -664,13 +680,13 @@ const datos =
                                     ${medalla}
                                 </span>
             
-                                ${producto.nombre}
+                                ${escaparHTML(producto.nombre)}
             
                             </span>
             
                             <span class="cantidad-vendida">
             
-                                ${producto.vendidos}
+                            ${Number(producto.vendidos)}
                                 ventas
             
                             </span>
@@ -730,11 +746,11 @@ const datos =
                     <div class="stock-item">
     
                         <span>
-                            ${producto.nombre}
+                        ${escaparHTML(producto.nombre)}
                         </span>
     
                         <span class="stock-numero">
-                            Stock: ${producto.stock}
+                            Stock: ${Number(producto.stock)}
                         </span>
     
                     </div>

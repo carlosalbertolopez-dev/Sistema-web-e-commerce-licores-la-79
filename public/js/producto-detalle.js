@@ -346,6 +346,16 @@ function removeItem(index) {
     renderDrawerItems();
 }
 
+function escaparHTML(texto) {
+
+    const div = document.createElement('div');
+
+    div.textContent = texto ?? '';
+
+    return div.innerHTML;
+
+}
+
 async function cargarRelacionados(
     categoria,
     sku
@@ -369,7 +379,7 @@ async function cargarRelacionados(
             contenedor.innerHTML += `
             <div class="col-md-3 col-6 mb-4">
                 <div class="card producto h-100">
-                    <a href="producto.html?sku=${p.sku}">
+                    <a href="producto.html?sku=${encodeURIComponent(p.sku)}">
                         <img
                             src="${p.imagen}"
                             class="card-img-top"
@@ -381,7 +391,7 @@ async function cargarRelacionados(
                     </a>
                     <div class="card-body">
                         <h6 class="text-white">
-                            ${p.nombre}
+                        ${escaparHTML(p.nombre)}
                         </h6>
                         <span
                             style="

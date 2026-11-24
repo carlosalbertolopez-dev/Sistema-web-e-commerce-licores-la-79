@@ -962,6 +962,38 @@ app.get(
   }
 );
 
+app.get(
+  '/api/admin/productos',
+  async (req, res, next) => {
+
+      try {
+
+          const result =
+              await pool.query(`
+                  SELECT
+                      id,
+                      sku,
+                      nombre,
+                      precio_cop,
+                      stock,
+                      imagen,
+                      activo
+                  FROM productos
+                  ORDER BY nombre
+              `);
+
+          res.json(
+              result.rows
+          );
+
+      } catch (error) {
+
+          next(error);
+
+      }
+
+  }
+);
 // ---------- Sitio estático y errores ----------
 app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'deny' }));
 app.get('/', (req, res) => {
